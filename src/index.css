@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom focus styles */
+*:focus {
+  outline: none;
+}
+
+/* Enhanced form elements */
+input, select, textarea {
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: black;
+}
+
+/* Custom selection color */
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+  color: inherit;
+}
+
+/* Professional typography */
+.font-light {
+  font-weight: 300;
+}
+
+/* Clean button styles */
+.btn-clean {
+  transition: all 0.2s ease;
+}
+
+.btn-clean:hover {
+  transform: translateY(-1px);
+}
+
+/* Minimal shadows */
+.shadow-minimal {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional spacing */
+.section-padding {
+  padding: 6rem 0;
+}
+
+/* Clean borders */
+.border-clean {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+ 
