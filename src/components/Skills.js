@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const Skills = () => {
   const skills = [
@@ -54,34 +54,38 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-8 bg-white/50 relative overflow-hidden">
-      <div className="relative z-20">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-light mb-3 text-black/90">Core Competencies</h2>
-          <div className="w-12 h-px bg-black/30 mx-auto"></div>
-          <p className="text-sm text-black/70 mt-3 max-w-2xl mx-auto leading-relaxed">
-            Technologies and tools I use to bring ideas to life
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skills.map((skill, index) => (
-            <div
-              key={skill.name}
-              className="bg-white/90 backdrop-blur-sm p-4 border border-black/10 hover:border-black/30 transition-all duration-300 group hover:scale-105 shadow-sm hover:shadow-lg relative z-10"
-            >
-              <div className="flex items-center mb-2">
-                <div className="w-8 h-8 bg-black/10 border border-black/20 rounded flex items-center justify-center mr-3 group-hover:bg-black/20 transition-colors duration-200">
-                  {getSkillIcon(skill.name)}
+    <section id="skills" className="py-8 relative overflow-hidden" aria-label="Skills section">
+      <div className="absolute inset-0 bg-gradient-to-br from-black/[0.01] via-white to-black/[0.02] rounded-lg"></div>
+      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-6 lg:p-8">
+        <div className="relative z-20">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-light mb-3 text-black/90">Core Competencies</h2>
+            <div className="w-12 h-px bg-black/30 mx-auto"></div>
+            <p className="text-sm text-black/70 mt-3 max-w-2xl mx-auto leading-relaxed">
+              Technologies and tools I use to bring ideas to life
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skills.map((skill, index) => (
+              <div
+                key={skill.name}
+                className="bg-white/95 backdrop-blur-sm p-5 border border-black/10 hover:border-black/25 transition-all duration-300 group hover:scale-[1.02] shadow-md hover:shadow-lg relative z-10 focus-within:ring-2 focus-within:ring-black/20 focus-within:ring-offset-2 rounded-md hover:-translate-y-1"
+              >
+                <div className="flex items-center mb-3">
+                  <div className="w-9 h-9 bg-black/5 border border-black/15 rounded-md flex items-center justify-center mr-3 group-hover:bg-black/10 group-hover:border-black/25 transition-all duration-300 group-hover:scale-105">
+                    {getSkillIcon(skill.name)}
+                  </div>
+                  <h3 className="font-bold text-base group-hover:text-black transition-colors duration-300 text-black/85">{skill.name}</h3>
                 </div>
-                <h3 className="font-bold text-base group-hover:text-black/90 transition-colors duration-200 text-black/80">{skill.name}</h3>
+                <p className="text-black/70 text-xs leading-relaxed group-hover:text-black/80 transition-colors duration-300">{skill.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/[0.02] rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
-              <p className="text-black/70 text-xs leading-relaxed">{skill.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Skills; 
+export default memo(Skills); 
