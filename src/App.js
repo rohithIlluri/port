@@ -83,14 +83,16 @@ function App() {
       <main className="py-8 xl:py-12 relative" role="main">
         <div className="max-w-none mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-8 justify-center">
-            {/* Left Desktop Sidebar */}
-            <div className="hidden xl:block sticky top-8 self-start">
-              <ErrorBoundary>
-                <Sidebar />
-              </ErrorBoundary>
+            {/* Left Desktop Sidebar - Fixed width for consistency */}
+            <div className="hidden xl:block w-80 flex-shrink-0">
+              <div className="sticky top-8">
+                <ErrorBoundary>
+                  <Sidebar />
+                </ErrorBoundary>
+              </div>
             </div>
 
-            {/* Main Content */}
+            {/* Main Content - Centered with max width */}
             <div className="flex-1 max-w-4xl mx-auto xl:mx-0 space-y-12">
               <ErrorBoundary>
                 <Hero />
@@ -122,11 +124,13 @@ function App() {
               </ErrorBoundary>
             </div>
 
-            {/* Right Desktop Sidebar */}
-            <div className="hidden xl:block sticky top-8 self-start">
-              <ErrorBoundary>
-                <RightSidebar />
-              </ErrorBoundary>
+            {/* Right Desktop Sidebar - Fixed width for consistency */}
+            <div className="hidden xl:block w-80 flex-shrink-0">
+              <div className="sticky top-8">
+                <ErrorBoundary>
+                  <RightSidebar />
+                </ErrorBoundary>
+              </div>
             </div>
           </div>
         </div>

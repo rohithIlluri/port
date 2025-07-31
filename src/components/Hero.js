@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 const Hero = () => {
   return (
-    <section id="about" className="py-12 relative" aria-label="About section">
+    <section id="about" className="py-8 relative" aria-label="About section">
       <div className="absolute inset-0 bg-gradient-to-br from-white via-black/[0.01] to-black/[0.02] rounded-lg"></div>
       <div className="relative bg-white/60 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
         <div className="text-center lg:text-left">

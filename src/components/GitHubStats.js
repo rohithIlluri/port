@@ -1,7 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import GitHubProfile from './GitHubProfile';
-import GitHubStatsGrid from './GitHubStatsGrid';
+// Import badge images
+import badge1 from '../badges/1750429963920.png';
+import badge2 from '../badges/1750430228955.png';
+import badge3 from '../badges/1750430366630.png';
+import badge4 from '../badges/image-1.png';
+import badge5 from '../badges/image.png';
 import GitHubAchievements from './GitHubAchievements';
+
+const CertificationBadges = () => {
+  const badges = [
+    { 
+      src: badge1, 
+      alt: 'Certification Badge 1',
+      url: 'https://www.credly.com/badges/e1806a87-eb8a-4af6-afeb-96c8616bb19f'
+    },
+    { 
+      src: badge2, 
+      alt: 'Certification Badge 2',
+      url: 'https://www.credly.com/badges/425f4473-3607-4f15-bd00-24603e4fd68a'
+    },
+    { 
+      src: badge3, 
+      alt: 'Certification Badge 3',
+      url: 'https://www.credly.com/badges/b6b4c668-1553-4747-9dbc-106c9b227b68'
+    },
+    { 
+      src: badge4, 
+      alt: 'Certification Badge 4',
+      url: 'https://www.credly.com/badges/0f3eeb62-a422-43b8-82e1-bbbc570f0e4c'
+    },
+    { 
+      src: badge5, 
+      alt: 'Certification Badge 5',
+      url: 'https://www.credly.com/badges/e8faf7e9-4bdb-4572-ae0f-5b548854c07b'
+    },
+  ];
+
+  const handleBadgeClick = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <div className="bg-white p-6 border border-black/10 rounded-none shadow-minimal">
+      <h4 className="text-xs font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
+      <div className="grid grid-cols-2 gap-3">
+        {badges.map((badge, index) => (
+          <div 
+            key={index}
+            onClick={() => handleBadgeClick(badge.url)}
+            className="bg-gradient-to-br from-black/5 to-black/10 p-3 rounded-none hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
+          >
+            <img 
+              src={badge.src} 
+              alt={badge.alt}
+              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const GitHubStats = () => {
   const [profile, setProfile] = useState(null);
@@ -284,7 +344,7 @@ const GitHubStats = () => {
   return (
     <div className="space-y-6">
       <GitHubProfile profile={profile} />
-      <GitHubStatsGrid profile={profile} stats={stats} />
+      <CertificationBadges />
       <GitHubAchievements achievements={achievements} />
       
       {/* GitHub Live Stats */}
