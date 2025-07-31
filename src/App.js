@@ -6,6 +6,7 @@ import Playlist from "./components/Playlist";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
+import RightSidebar from "./components/RightSidebar";
 import ErrorBoundary from "./components/ErrorBoundary";
 
 // Moved outside component to prevent re-creation on every render
@@ -67,9 +68,12 @@ function App() {
       {isMobileMenuOpen && (
         <div className="xl:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
           <div className="absolute right-0 top-0 h-full w-80 bg-white/95 backdrop-blur-sm shadow-2xl overflow-y-auto border-l border-black/10" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6 pt-20">
+            <div className="p-6 pt-20 space-y-8">
               <ErrorBoundary>
                 <Sidebar />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <RightSidebar />
               </ErrorBoundary>
             </div>
           </div>
@@ -77,9 +81,9 @@ function App() {
       )}
 
       <main className="py-8 xl:py-12 relative" role="main">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-12">
-            {/* Desktop Sidebar */}
+        <div className="max-w-none mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex gap-8 justify-center">
+            {/* Left Desktop Sidebar */}
             <div className="hidden xl:block sticky top-8 self-start">
               <ErrorBoundary>
                 <Sidebar />
@@ -87,7 +91,7 @@ function App() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 max-w-4xl xl:max-w-4xl mx-auto xl:mx-0 space-y-12">
+            <div className="flex-1 max-w-4xl mx-auto xl:mx-0 space-y-12">
               <ErrorBoundary>
                 <Hero />
               </ErrorBoundary>
@@ -115,6 +119,13 @@ function App() {
 
               <ErrorBoundary>
                 <Contact />
+              </ErrorBoundary>
+            </div>
+
+            {/* Right Desktop Sidebar */}
+            <div className="hidden xl:block sticky top-8 self-start">
+              <ErrorBoundary>
+                <RightSidebar />
               </ErrorBoundary>
             </div>
           </div>
