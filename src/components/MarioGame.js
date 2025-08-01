@@ -204,11 +204,7 @@ const MarioGame = ({ isOpen, onClose }) => {
 
     // Check if player fell off screen
     if (player.y > 600) {
-      console.log('Game over: Player fell off screen at y =', player.y);
-      console.log('Player position: x =', player.x, 'y =', player.y);
-      console.log('Available platforms near player:', 
-        platforms.filter(p => Math.abs(p.x - player.x) < 200).map(p => ({x: p.x, y: p.y, width: p.width}))
-      );
+                      // Game over: Player fell off screen
       setGameOver(true);
       return;
     }
