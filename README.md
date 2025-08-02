@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Full Stack Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time chat application built with React (client) and Node.js WebSocket server.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+```
+port/
+├── client/          # React frontend application
+│   ├── src/         # React source code
+│   ├── public/      # Static assets
+│   └── package.json # Frontend dependencies
+├── server/          # Node.js WebSocket server
+│   ├── index.js     # WebSocket server code
+│   └── package.json # Backend dependencies
+└── package.json     # Root scripts and dev dependencies
+```
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Real-time messaging via WebSocket
+- Guest ID system for user identification
+- Responsive chat interface
+- Connection status indicators
+- Message history display
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+### First Time Setup
+```bash
+npm run setup
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Development
 
-### `npm run build`
+**Option 1: Run everything together**
+```bash
+npm run dev
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Option 2: Run separately**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Start the WebSocket server:**
+   ```bash
+   npm run server
+   # or
+   cd server && node index.js
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Start the React client:**
+   ```bash
+   npm run client
+   # or
+   cd client && npm start
+   ```
 
-### `npm run eject`
+3. **Open your browser:**
+   - Client: http://localhost:3001
+   - WebSocket: ws://localhost:8080
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Development
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installing Dependencies
+```bash
+npm run install-all
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Building for Production
+```bash
+npm run build
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Cleaning
+```bash
+npm run clean
+```
 
-## Learn More
+## Technology Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Frontend:** React, Tailwind CSS
+- **Backend:** Node.js, WebSocket (ws)
+- **Real-time:** WebSocket communication
+- **Styling:** Tailwind CSS
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Troubleshooting
 
-### Code Splitting
+### Port Conflicts
+- The client runs on port 3001 to avoid conflicts
+- The server runs on port 8080
+- If you get port conflicts, try: `npm run clean && npm run setup`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### WebSocket Connection Issues
+- Make sure the server is running before opening the client
+- Check that port 8080 is not being used by another application
 
-### Analyzing the Bundle Size
+## Next Steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Add user authentication
+- Implement message persistence (database)
+- Add typing indicators
+- Support for multiple chat rooms
+- File sharing capabilities
