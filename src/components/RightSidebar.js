@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MarioGame from './MarioGame';
+import CollaborativeText from './CollaborativeText';
 
 const RightSidebar = () => {
   const [isGameOpen, setIsGameOpen] = useState(false);
@@ -39,6 +40,9 @@ const RightSidebar = () => {
             </button>
           </div>
         </div>
+
+        {/* Collaborative Text Space */}
+        <CollaborativeText />
       </aside>
 
       {/* Mario Game Modal */}
