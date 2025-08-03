@@ -613,7 +613,7 @@ const MarioGame = ({ isOpen, onClose }) => {
         />
 
         {/* Game UI */}
-        <div className="absolute top-4 left-4 text-white z-10">
+        <div className="absolute top-4 left-4 text-black z-10">
           <div className="bg-black/70 backdrop-blur-sm p-4 rounded-lg border border-white/20">
             <h2 className="text-xl font-bold mb-2">🍄 Mario Jump</h2>
             <p className="text-lg font-semibold">Distance: {score}m</p>
@@ -622,7 +622,7 @@ const MarioGame = ({ isOpen, onClose }) => {
               <div className="mt-3 space-y-2">
               <button 
                 onClick={initGame}
-                  className="block w-full px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+                  className="block w-full px-4 py-2 bg-green-500 hover:bg-green-600 text-black rounded-lg font-semibold transition-colors"
               >
                   Start Game (ENTER)
               </button>
@@ -646,7 +646,7 @@ const MarioGame = ({ isOpen, onClose }) => {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white bg-red-500 hover:bg-red-600 p-2 rounded-full z-10 transition-colors"
+          className="absolute top-4 right-4 text-black bg-red-500 hover:bg-red-600 p-2 rounded-full z-10 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -666,13 +666,13 @@ const MarioGame = ({ isOpen, onClose }) => {
               <div className="space-y-3">
                 <button 
                   onClick={initGame}
-                  className="block w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition-colors"
+                  className="block w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-black rounded-lg font-semibold transition-colors"
                 >
                   Play Again (ENTER)
                 </button>
                 <button 
                   onClick={onClose}
-                  className="block w-full px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-semibold transition-colors"
+                  className="block w-full px-6 py-3 bg-gray-500 hover:bg-gray-600 text-black rounded-lg font-semibold transition-colors"
                 >
                   Close Game (ESC)
                 </button>
@@ -682,7 +682,7 @@ const MarioGame = ({ isOpen, onClose }) => {
         )}
 
         {/* Instructions */}
-        <div className="absolute bottom-4 left-4 text-white z-10">
+        <div className="absolute bottom-4 left-4 text-black z-10">
           <div className="bg-black/70 backdrop-blur-sm p-3 rounded-lg border border-white/20">
             <p className="text-sm font-bold mb-1">🎮 Game Instructions:</p>
             <div className="text-xs space-y-1">
@@ -701,7 +701,7 @@ const MarioGame = ({ isOpen, onClose }) => {
         {!gameStarted && !gameOver && (
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="bg-green-500/90 backdrop-blur-sm p-6 rounded-2xl border-4 border-yellow-300 shadow-2xl text-center">
-              <div className="text-white">
+              <div className="text-black">
                 <h3 className="text-2xl font-bold mb-2">🎮 GAME READY!</h3>
                 <p className="text-lg mb-3">Controls are active</p>
                 <div className="text-sm space-y-1">

@@ -43,14 +43,14 @@ const CertificationBadges = () => {
   };
 
   return (
-    <div className="bg-white p-6 border border-black/10 rounded-none shadow-minimal">
-      <h4 className="text-xs font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
-      <div className="grid grid-cols-2 gap-3">
+    <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+      <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
+      <div className="grid grid-cols-2 gap-4">
         {badges.map((badge, index) => (
           <div 
             key={index}
             onClick={() => handleBadgeClick(badge.url)}
-            className="bg-gradient-to-br from-black/5 to-black/10 p-3 rounded-none hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
+            className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-none hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
           >
             <img 
               src={badge.src} 
@@ -152,16 +152,16 @@ const GitHubStats = () => {
 
   if (loading) {
     return (
-      <div className="bg-white p-6 border border-black/10 rounded-none shadow-minimal">
-        <div className="animate-pulse space-y-4">
+      <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+        <div className="animate-pulse space-y-6">
           <div className="h-20 w-20 bg-black/10 rounded-full mx-auto"></div>
           <div className="h-4 bg-black/10 rounded-none"></div>
           <div className="h-3 bg-black/10 rounded-none w-3/4 mx-auto"></div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             <div className="h-16 bg-black/10 rounded-none"></div>
             <div className="h-16 bg-black/10 rounded-none"></div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             <div className="h-16 bg-black/10 rounded-none"></div>
             <div className="h-16 bg-black/10 rounded-none"></div>
           </div>
@@ -173,13 +173,13 @@ const GitHubStats = () => {
 
   if (error) {
     return (
-      <div className="bg-white p-6 border border-red-200 rounded-none shadow-minimal">
+      <div className="bg-white p-8 border border-red-200 rounded-none shadow-minimal">
         <div className="text-center">
-          <div className="text-red-500 text-sm mb-2">⚠️ Error</div>
-          <p className="text-black/70 text-xs">{error}</p>
+          <div className="text-red-500 text-sm mb-4">⚠️ Error</div>
+          <p className="text-black/70 text-sm">{error}</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="mt-3 px-4 py-2 text-xs bg-black text-black rounded-none hover:bg-black/80 transition-colors"
+            className="mt-4 px-4 py-2 text-sm bg-black text-black rounded-none hover:bg-black/80 transition-colors"
           >
             Retry
           </button>
@@ -189,16 +189,16 @@ const GitHubStats = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <GitHubProfile profile={profile} />
       <CertificationBadges />
       <GitHubStatsGrid profile={profile} stats={stats} />
       <GitHubAchievements achievements={achievements} />
       
       {/* GitHub Badges */}
-      <div className="bg-white p-6 border border-black/10 rounded-none shadow-minimal">
-        <h4 className="text-xs font-medium uppercase tracking-wide text-black/80 mb-4">Live Statistics</h4>
-        <div className="space-y-4">
+      <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+        <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Live Statistics</h4>
+        <div className="space-y-6">
           <img
             src="https://github-readme-stats.vercel.app/api?username=rohithIlluri&show_icons=true&theme=default&hide_border=true&count_private=true"
             alt="GitHub Stats"

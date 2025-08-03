@@ -103,7 +103,7 @@ function App() {
               
               {/* Projects & Music Section */}
               <section className="py-4" aria-label="Projects and Music">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                   <ErrorBoundary>
                     <Projects 
                       repos={repos}

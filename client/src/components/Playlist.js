@@ -4,8 +4,8 @@ const Playlist = () => {
   return (
     <div className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-black/[0.01] via-white to-black/[0.02] rounded-lg"></div>
-      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-6">
-        <h2 className="text-2xl font-light mb-6 text-black/90">Playlist</h2>
+      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
+        <h2 className="text-2xl font-light mb-8 text-black/90">Playlist</h2>
         <div className="border border-black/10 bg-white/95 backdrop-blur-sm rounded-md overflow-hidden hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 group">
           <div className="relative">
             <iframe
@@ -17,8 +17,8 @@ const Playlist = () => {
             ></iframe>
             <div className="absolute inset-0 bg-gradient-to-t from-black/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
           </div>
-          <div className="p-4 bg-white/95 border-t border-black/5">
-            <p className="text-xs text-black/70 leading-relaxed">
+          <div className="p-6 bg-white/95 border-t border-black/5">
+            <p className="text-sm text-black/70 leading-relaxed">
               A curated collection of inspiring music to code by
             </p>
           </div>

@@ -65,18 +65,18 @@ const CollaborativeText = () => {
   return (
     <>
       {/* Launcher */}
-      <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-xl shadow-lg border border-purple-400 text-white overflow-hidden relative">
+      <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-8 rounded-xl shadow-lg border border-purple-400 text-black overflow-hidden relative">
         <div className="relative z-10">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold">💬 Global Chat</h3>
             <div className="text-2xl">🌐</div>
           </div>
-          <p className="text-purple-100 mb-4 text-sm">
+          <p className="text-purple-100 mb-6 text-sm leading-relaxed">
             Simple global chat. All users see all messages. No blockchain, no encryption.
           </p>
           <button
             onClick={openEditor}
-            className="w-full bg-purple-300 hover:bg-purple-400 text-purple-800 font-bold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="w-full bg-purple-300 hover:bg-purple-400 text-purple-800 font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
             💬 Open Chat
           </button>
@@ -101,52 +101,68 @@ const CollaborativeText = () => {
               </div>
               <button
                 onClick={closeEditor}
-                className="text-gray-400 hover:text-gray-600 text-2xl"
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
-                ×
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 
-            {/* Error Message */}
-            {error && (
-              <div className="px-6 py-2 bg-yellow-50 border-b border-yellow-200">
-                <div className="text-sm text-yellow-800">{error}</div>
-              </div>
-            )}
-
-            {/* Chat Messages */}
-            <div className="flex-1 p-6 overflow-y-auto bg-gray-50">
-              <div className="space-y-2">
-                {messages.map((msg, idx) => (
-                  <div key={idx} className={`flex ${msg.guestId === guestId ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`rounded-lg px-4 py-2 max-w-xs break-words ${msg.guestId === guestId ? 'bg-purple-200 text-purple-900' : 'bg-gray-200 text-gray-800'}`}>
-                      <span className="block text-xs font-semibold mb-1">{msg.guestId === guestId ? 'You' : msg.guestId}</span>
-                      <span>{msg.text}</span>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              {messages.length === 0 ? (
+                <div className="text-center text-gray-500 py-8">
+                  <div className="text-4xl mb-4">💬</div>
+                  <p>No messages yet. Be the first to say something!</p>
+                </div>
+              ) : (
+                messages.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={`flex ${msg.guestId === guestId ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                        msg.guestId === guestId
+                          ? 'bg-purple-500 text-black'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      <div className="text-xs opacity-75 mb-1">
+                        {msg.guestId === guestId ? 'You' : msg.guestId} • {new Date(msg.timestamp).toLocaleTimeString()}
+                      </div>
+                      <div className="text-sm">{msg.text}</div>
                     </div>
                   </div>
-                ))}
-                <div ref={chatEndRef} />
-              </div>
+                ))
+              )}
+              <div ref={chatEndRef} />
             </div>
 
             {/* Input */}
-            <div className="px-6 py-3 bg-gray-100 border-t border-gray-200 flex gap-2">
-              <textarea
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={handleInputKeyDown}
-                placeholder="Type your message..."
-                className="flex-1 p-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                style={{ minHeight: '40px', maxHeight: '80px' }}
-                disabled={!isConnected}
-              />
-              <button
-                onClick={sendMessage}
-                disabled={!isConnected || !input.trim()}
-                className="bg-purple-500 hover:bg-purple-600 disabled:bg-purple-300 text-white px-4 py-2 rounded-lg font-bold transition-colors"
-              >
-                Send
-              </button>
+            <div className="p-6 border-t border-gray-200">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleInputKeyDown}
+                  placeholder="Type your message..."
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  disabled={!isConnected}
+                />
+                <button
+                  onClick={sendMessage}
+                  disabled={!input.trim() || !isConnected}
+                  className="px-6 py-2 bg-purple-500 text-black rounded-lg hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  Send
+                </button>
+              </div>
+              {error && (
+                <p className="text-red-500 text-sm mt-2">{error}</p>
+              )}
             </div>
           </div>
         </div>

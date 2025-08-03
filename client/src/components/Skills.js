@@ -56,12 +56,12 @@ const Skills = () => {
   return (
     <section id="skills" className="py-8 relative overflow-hidden" aria-label="Skills section">
       <div className="absolute inset-0 bg-gradient-to-br from-black/[0.01] via-white to-black/[0.02] rounded-lg"></div>
-      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-6 lg:p-8">
+      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
         <div className="relative z-20">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-light mb-3 text-black/90">Core Competencies</h2>
-            <div className="w-12 h-px bg-black/30 mx-auto"></div>
-            <p className="text-sm text-black/70 mt-3 max-w-2xl mx-auto leading-relaxed">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-light mb-4 text-black/90">Core Competencies</h2>
+            <div className="w-12 h-px bg-black/30 mx-auto mb-4"></div>
+            <p className="text-sm text-black/70 max-w-2xl mx-auto leading-relaxed">
               Technologies and tools I use to bring ideas to life
             </p>
           </div>
@@ -69,15 +69,15 @@ const Skills = () => {
             {skills.map((skill, index) => (
               <div
                 key={skill.name}
-                className="bg-white/95 backdrop-blur-sm p-5 border border-black/10 hover:border-black/25 transition-all duration-300 group hover:scale-[1.02] shadow-md hover:shadow-lg relative z-10 focus-within:ring-2 focus-within:ring-black/20 focus-within:ring-offset-2 rounded-md hover:-translate-y-1"
+                className="bg-white/95 backdrop-blur-sm p-6 border border-black/10 hover:border-black/25 transition-all duration-300 group hover:scale-[1.02] shadow-md hover:shadow-lg relative z-10 focus-within:ring-2 focus-within:ring-black/20 focus-within:ring-offset-2 rounded-md hover:-translate-y-1"
               >
-                <div className="flex items-center mb-3">
-                  <div className="w-9 h-9 bg-black/5 border border-black/15 rounded-md flex items-center justify-center mr-3 group-hover:bg-black/10 group-hover:border-black/25 transition-all duration-300 group-hover:scale-105">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-black/5 border border-black/15 rounded-md flex items-center justify-center mr-4 group-hover:bg-black/10 group-hover:border-black/25 transition-all duration-300 group-hover:scale-105">
                     {getSkillIcon(skill.name)}
                   </div>
                   <h3 className="font-bold text-base group-hover:text-black transition-colors duration-300 text-black/85">{skill.name}</h3>
                 </div>
-                <p className="text-black/70 text-xs leading-relaxed group-hover:text-black/80 transition-colors duration-300">{skill.description}</p>
+                <p className="text-black/70 text-sm leading-relaxed group-hover:text-black/80 transition-colors duration-300">{skill.description}</p>
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/[0.02] rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
             ))}
