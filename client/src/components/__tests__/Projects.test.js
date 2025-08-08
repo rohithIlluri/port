@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Projects from '../Projects';
+import Projects from '../sections/Projects';
 
 const mockRepos = [
   {

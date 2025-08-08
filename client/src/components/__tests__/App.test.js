@@ -4,19 +4,18 @@ import '@testing-library/jest-dom';
 import App from '../../App';
 
 // Mock the components to avoid complex dependencies
-jest.mock('../Hero', () => () => <div data-testid="hero">Hero Component</div>);
-jest.mock('../Skills', () => () => <div data-testid="skills">Skills Component</div>);
-jest.mock('../Projects', () => ({ repos, loading, error, selectedRepo, handleRepoClick }) => (
+jest.mock('../../sections/Hero', () => () => <div data-testid="hero">Hero Component</div>);
+jest.mock('../../sections/Skills', () => () => <div data-testid="skills">Skills Component</div>);
+jest.mock('../../sections/Projects', () => ({ repos, loading, error, selectedRepo, handleRepoClick }) => (
   <div data-testid="projects">
     Projects Component
     {loading && <span data-testid="projects-loading">Loading</span>}
     {error && <span data-testid="projects-error">{error}</span>}
   </div>
 ));
-jest.mock('../Playlist', () => () => <div data-testid="playlist">Playlist Component</div>);
-jest.mock('../Contact', () => () => <div data-testid="contact">Contact Component</div>);
-jest.mock('../Footer', () => () => <div data-testid="footer">Footer Component</div>);
-jest.mock('../Sidebar', () => () => <div data-testid="sidebar">Sidebar Component</div>);
+jest.mock('../../sections/Contact', () => () => <div data-testid="contact">Contact Component</div>);
+jest.mock('../../layout/Footer', () => () => <div data-testid="footer">Footer Component</div>);
+jest.mock('../../layout/Sidebar', () => () => <div data-testid="sidebar">Sidebar Component</div>);
 
 // Mock fetch for GitHub API
 global.fetch = jest.fn();
@@ -41,7 +40,6 @@ describe('App Component', () => {
     expect(screen.getByTestId('hero')).toBeInTheDocument();
     expect(screen.getByTestId('skills')).toBeInTheDocument();
     expect(screen.getByTestId('projects')).toBeInTheDocument();
-    expect(screen.getByTestId('playlist')).toBeInTheDocument();
     expect(screen.getByTestId('contact')).toBeInTheDocument();
     expect(screen.getByTestId('footer')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();

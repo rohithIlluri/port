@@ -1,17 +1,18 @@
 import React, { memo } from 'react';
+import Reveal from '../ui/Reveal';
 
 const Contact = () => {
   return (
     <section id="contact" className="py-8 relative overflow-hidden" aria-label="Contact section">
       <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] via-white to-black/[0.01] rounded-lg"></div>
-      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
+      <Reveal className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-2xl font-light mb-6 text-black/90">Get In Touch</h2>
-          <div className="w-16 h-px bg-black/30 mx-auto mb-6"></div>
-          <p className="text-sm text-black/70 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <Reveal as="h2" delay={50} className="text-2xl font-light mb-6 text-black/90">Get In Touch</Reveal>
+          <Reveal delay={120} className="w-16 h-px bg-black/30 mx-auto mb-6" />
+          <Reveal as="p" delay={180} className="text-sm text-black/70 mb-12 max-w-2xl mx-auto leading-relaxed">
             Have a question or want to collaborate? Feel free to reach out.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          </Reveal>
+          <Reveal delay={240} className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
               href="mailto:rohith.illuri@gmail.com"
               className="inline-flex items-center justify-center px-8 py-4 bg-black text-black font-medium rounded-md hover:bg-black/80 transition-all duration-300 text-sm uppercase tracking-wide hover:scale-105 hover:shadow-lg transform shadow-md group"
@@ -32,9 +33,9 @@ const Contact = () => {
               </svg>
               GitHub
             </a>
-          </div>
+          </Reveal>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

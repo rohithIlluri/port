@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Hero from "./components/Hero";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Playlist from "./components/Playlist";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Sidebar from "./components/Sidebar";
-import RightSidebar from "./components/RightSidebar";
-import ErrorBoundary from "./components/ErrorBoundary";
-
-// Moved outside component to prevent re-creation on every render
-const showcaseRepos = ["Nnets", "toronto-project", "cryptoapp"];
+import Hero from "./components/sections/Hero";
+import Skills from "./components/sections/Skills";
+import Projects from "./components/sections/Projects";
+import Contact from "./components/sections/Contact";
+import Footer from "./components/layout/Footer";
+import Sidebar from "./components/layout/Sidebar";
+import RightSidebar from "./components/layout/RightSidebar";
+import ErrorBoundary from "./components/ui/ErrorBoundary";
+import { fetchGitHubRepos } from "./utils/api";
 
 function App() {
   const [repos, setRepos] = useState([]);
@@ -20,25 +17,21 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://api.github.com/users/rohithIlluri/repos")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch repositories from GitHub API.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const filteredRepos = data.filter((repo) =>
-          showcaseRepos.includes(repo.name)
-        );
-        setRepos(filteredRepos);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const loadRepos = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchGitHubRepos();
+        setRepos(data);
+      } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
-      });
-  }, []); // Empty dependency array is correct here
+      }
+    };
+
+    loadRepos();
+  }, []);
 
   const handleRepoClick = useCallback((repoName) => {
     const repo = repos.find((r) => r.name === repoName);
@@ -67,7 +60,7 @@ function App() {
       {/* Mobile Sidebar Overlay */}
       {isMobileMenuOpen && (
         <div className="xl:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="absolute right-0 top-0 h-full w-80 bg-white/95 backdrop-blur-sm shadow-2xl overflow-y-auto border-l border-black/10" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute right-0 top-0 h-full w-96 bg-white/95 backdrop-blur-sm shadow-2xl overflow-y-auto border-l border-black/10" onClick={(e) => e.stopPropagation()}>
             <div className="p-6 pt-20 space-y-8">
               <ErrorBoundary>
                 <Sidebar />
@@ -80,7 +73,7 @@ function App() {
         </div>
       )}
 
-      <main className="py-8 xl:py-12 relative" role="main">
+      <main className="py-10 xl:py-16 relative" role="main">
         <div className="max-w-none mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-8 justify-center">
             {/* Left Desktop Sidebar - Fixed width for consistency */}
@@ -93,7 +86,7 @@ function App() {
             </div>
 
             {/* Main Content - Centered with max width */}
-            <div className="flex-1 max-w-4xl mx-auto xl:mx-0 space-y-12">
+            <div className="flex-1 max-w-4xl mx-auto xl:mx-0 space-y-16">
               <ErrorBoundary>
                 <Hero />
               </ErrorBoundary>
@@ -101,22 +94,17 @@ function App() {
                 <Skills />
               </ErrorBoundary>
               
-              {/* Projects & Music Section */}
-              <section className="py-4" aria-label="Projects and Music">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                  <ErrorBoundary>
-                    <Projects 
-                      repos={repos}
-                      loading={loading}
-                      error={error}
-                      selectedRepo={selectedRepo}
-                      handleRepoClick={handleRepoClick}
-                    />
-                  </ErrorBoundary>
-                  <ErrorBoundary>
-                    <Playlist />
-                  </ErrorBoundary>
-                </div>
+              {/* Projects Section */}
+              <section id="projects" className="py-4 scroll-offset" aria-label="Projects">
+                <ErrorBoundary>
+                  <Projects 
+                    repos={repos}
+                    loading={loading}
+                    error={error}
+                    selectedRepo={selectedRepo}
+                    handleRepoClick={handleRepoClick}
+                  />
+                </ErrorBoundary>
               </section>
 
               <ErrorBoundary>
@@ -124,9 +112,9 @@ function App() {
               </ErrorBoundary>
             </div>
 
-            {/* Right Desktop Sidebar - Fixed width for consistency */}
-            <div className="hidden xl:block w-80 flex-shrink-0">
-              <div className="sticky top-8">
+            {/* Right Desktop Sidebar - Video Player */}
+            <div className="hidden xl:block w-96 flex-shrink-0">
+              <div className="sticky top-8 h-[calc(100vh-4rem)]">
                 <ErrorBoundary>
                   <RightSidebar />
                 </ErrorBoundary>

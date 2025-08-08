@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Hero from '../Hero';
+import Hero from '../sections/Hero';
 
 describe('Hero Component', () => {
   test('renders welcome message and title', () => {

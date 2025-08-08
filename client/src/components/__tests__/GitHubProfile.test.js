@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import GitHubProfile from '../GitHubProfile';
+import GitHubProfile from '../github/GitHubProfile';
 
 const mockProfile = {
   name: 'John Doe',

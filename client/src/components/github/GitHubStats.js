@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Reveal from '../ui/Reveal';
 import GitHubProfile from './GitHubProfile';
 import GitHubAchievements from './GitHubAchievements';
 import GitHubStatsGrid from './GitHubStatsGrid';
 // Import badge images
-import badge1 from '../badges/1750429963920.png';
-import badge2 from '../badges/1750430228955.png';
-import badge3 from '../badges/1750430366630.png';
-import badge4 from '../badges/image-1.png';
-import badge5 from '../badges/image.png';
+import badge1 from '../../assets/images/1750429963920.png';
+import badge2 from '../../assets/images/1750430228955.png';
+import badge3 from '../../assets/images/1750430366630.png';
+import badge4 from '../../assets/images/image-1.png';
+import badge5 from '../../assets/images/image.png';
 
 const CertificationBadges = () => {
   const badges = [
@@ -43,14 +44,14 @@ const CertificationBadges = () => {
   };
 
   return (
-    <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+    <div className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
       <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
       <div className="grid grid-cols-2 gap-4">
         {badges.map((badge, index) => (
           <div 
             key={index}
             onClick={() => handleBadgeClick(badge.url)}
-            className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-none hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
+            className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
           >
             <img 
               src={badge.src} 
@@ -152,20 +153,20 @@ const GitHubStats = () => {
 
   if (loading) {
     return (
-      <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+      <div className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
         <div className="animate-pulse space-y-6">
           <div className="h-20 w-20 bg-black/10 rounded-full mx-auto"></div>
-          <div className="h-4 bg-black/10 rounded-none"></div>
-          <div className="h-3 bg-black/10 rounded-none w-3/4 mx-auto"></div>
+          <div className="h-4 bg-black/10 rounded-lg"></div>
+          <div className="h-3 bg-black/10 rounded-lg w-3/4 mx-auto"></div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="h-16 bg-black/10 rounded-none"></div>
-            <div className="h-16 bg-black/10 rounded-none"></div>
+            <div className="h-16 bg-black/10 rounded-lg"></div>
+            <div className="h-16 bg-black/10 rounded-lg"></div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="h-16 bg-black/10 rounded-none"></div>
-            <div className="h-16 bg-black/10 rounded-none"></div>
+            <div className="h-16 bg-black/10 rounded-lg"></div>
+            <div className="h-16 bg-black/10 rounded-lg"></div>
           </div>
-          <div className="h-12 bg-black/10 rounded-none"></div>
+          <div className="h-12 bg-black/10 rounded-lg"></div>
         </div>
       </div>
     );
@@ -173,13 +174,13 @@ const GitHubStats = () => {
 
   if (error) {
     return (
-      <div className="bg-white p-8 border border-red-200 rounded-none shadow-minimal">
+      <div className="bg-white/80 backdrop-blur-sm p-8 border border-red-200 rounded-lg shadow-lg">
         <div className="text-center">
           <div className="text-red-500 text-sm mb-4">⚠️ Error</div>
           <p className="text-black/70 text-sm">{error}</p>
           <button 
             onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 text-sm bg-black text-black rounded-none hover:bg-black/80 transition-colors"
+            className="mt-4 px-4 py-2 text-sm bg-black text-black rounded-md hover:bg-black/80 transition-colors"
           >
             Retry
           </button>
@@ -190,13 +191,21 @@ const GitHubStats = () => {
 
   return (
     <div className="space-y-8">
-      <GitHubProfile profile={profile} />
-      <CertificationBadges />
-      <GitHubStatsGrid profile={profile} stats={stats} />
-      <GitHubAchievements achievements={achievements} />
+      <Reveal delay={50}>
+        <GitHubProfile profile={profile} />
+      </Reveal>
+      <Reveal delay={100}>
+        <CertificationBadges />
+      </Reveal>
+      <Reveal delay={150}>
+        <GitHubStatsGrid profile={profile} stats={stats} />
+      </Reveal>
+      <Reveal delay={200}>
+        <GitHubAchievements achievements={achievements} />
+      </Reveal>
       
       {/* GitHub Badges */}
-      <div className="bg-white p-8 border border-black/10 rounded-none shadow-minimal">
+      <Reveal delay={250} className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
         <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Live Statistics</h4>
         <div className="space-y-6">
           <img
@@ -227,7 +236,7 @@ const GitHubStats = () => {
             }}
           />
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 };
