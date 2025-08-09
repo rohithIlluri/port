@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { loadYouTubeAPI } from '../../utils/api';
 import { YOUTUBE_PLAYLIST_ID, YOUTUBE_PLAYER_CONFIG } from '../../constants/youtube';
 
-const RightSidebar = () => {
+const RightSidebar = ({ hideHeader = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const [currentVideoInfo, setCurrentVideoInfo] = useState(null);
@@ -331,7 +331,7 @@ const RightSidebar = () => {
 
   if (!isPlayerReady) {
     return (
-      <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden h-full flex items-center justify-center backdrop-blur-sm">
+      <div className="glass-card rounded-2xl overflow-hidden h-full flex items-center justify-center liquid-wave">
         <div className="text-center p-8">
           <div className="relative mb-6">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-gray-600 mx-auto"></div>
@@ -349,48 +349,59 @@ const RightSidebar = () => {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden h-full flex flex-col backdrop-blur-sm">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-white/90 via-gray-50/80 to-gray-100/70 text-black p-6 relative overflow-hidden backdrop-blur-xl border-b border-gray-200/20 shadow-2xl">
-        {/* Enhanced liquid glass overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/5 via-black/3 to-transparent backdrop-blur-lg"></div>
-        
-        {/* Animated glass particles with more sophisticated animation */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-12 -left-12 w-24 h-24 bg-gradient-to-br from-black/10 to-black/5 rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-gradient-to-tl from-black/8 to-black/3 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-gradient-to-r from-black/6 to-black/4 rounded-full blur-lg animate-pulse delay-500"></div>
-          <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-black/5 rounded-full blur-md animate-pulse delay-1500"></div>
-        </div>
-        
-        {/* Subtle animated border */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent"></div>
-        
-        {/* Content */}
-        <div className="relative flex items-center space-x-5 z-10">
-          <div className="relative">
-            <div className="text-4xl drop-shadow-2xl filter brightness-110">🎬</div>
+    <div className={`glass overflow-hidden h-full flex flex-col ${hideHeader ? 'rounded-none border-none shadow-none' : 'rounded-2xl liquid-wave'}`}>
+      {/* Enhanced Header - Conditionally rendered */}
+      {!hideHeader && (
+        <div className="relative bg-gradient-to-br from-red-500/10 via-pink-500/5 to-purple-500/10 backdrop-blur-xl text-black p-6 overflow-hidden border-b border-gray-200/30 shadow-xl group hover:glow transition-all duration-500">
+          {/* Background decoration */}
+          <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-red-500/15 to-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-tl from-purple-500/10 to-blue-500/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-orange-500/8 to-red-500/12 rounded-full blur-xl animate-pulse delay-500"></div>
+          
+          {/* Animated border */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent"></div>
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-center space-x-4 mb-3">
+              <div className="relative group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <svg className="w-6 h-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse shadow-lg group-hover:scale-125 transition-transform duration-300"></div>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-gray-800 tracking-tight group-hover:text-gray-900 group-hover:scale-105 transition-all duration-300">
+                  YouTube Music
+                </h2>
+                <p className="text-sm text-gray-600 mt-1 group-hover:text-gray-700 group-hover:font-medium transition-all duration-300">Personal playlist & music collection</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-xs text-red-600 font-medium bg-red-50 px-2 py-1 rounded-full border border-red-200">LIVE</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-gray-600">
+                <a 
+                  href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn inline-flex items-center px-3 py-1.5 bg-white/60 hover:bg-white/80 rounded-lg border border-gray-200/60 hover:border-gray-300/60 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                >
+                  <svg className="w-4 h-4 mr-2 text-gray-500 group-hover/btn:text-gray-700 group-hover/btn:scale-110 group-hover/btn:rotate-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  <span className="font-medium group-hover/btn:translate-x-1 group-hover/btn:font-bold transition-all duration-300">View Full Playlist</span>
+                </a>
+              </p>
+            </div>
           </div>
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold tracking-tight drop-shadow-lg bg-gradient-to-r from-black to-gray-700 bg-clip-text text-black">
-              YouTube Player
-            </h2>
-            <p className="text-sm text-gray-600 mt-2">
-              <a 
-                href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-black transition-all duration-300 hover:underline flex items-center space-x-2 drop-shadow-sm group"
-              >
-                <span className="group-hover:scale-105 transition-transform duration-200">View Full Playlist</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </p>
-          </div>
         </div>
-      </div>
+      )}
 
       {/* YouTube Player */}
       <div 
@@ -565,139 +576,200 @@ const RightSidebar = () => {
         </div>
       </div>
 
-      {/* Playlist Section */}
-      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-0 border-t border-gray-200/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
+      {/* Enhanced Playlist Section */}
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50/50 via-white/80 to-gray-50/50 min-h-0 border-t border-gray-200/30 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400 backdrop-blur-sm">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-bold text-gray-800 flex items-center">
-              <div className="relative mr-3">
-                <svg className="w-6 h-6 text-gray-600 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
-                <div className="absolute inset-0 w-6 h-6 text-gray-400 animate-ping opacity-20">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                  </svg>
-                </div>
               </div>
-              Your Playlist
-            </h3>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800 tracking-tight">Your Playlist</h3>
+                <p className="text-sm text-gray-500 mt-0.5">Curated music collection</p>
+              </div>
+            </div>
             <div className="flex items-center space-x-3">
               {playlistVideos.some(video => video.title === 'Loading...') && (
-                <div className="w-3 h-3 bg-gray-500 rounded-full animate-pulse shadow-lg"></div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs text-blue-600 font-medium">Syncing...</span>
+                </div>
               )}
-              <span className="text-sm text-gray-700 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 px-4 py-2 rounded-full font-semibold border border-gray-200/50 shadow-sm">
-                {playlistVideos.length || 'Loading'} videos
+              <span className="text-sm text-gray-700 bg-gradient-to-r from-blue-50 via-white to-purple-50 px-4 py-2 rounded-xl font-semibold border border-gray-200/60 shadow-sm hover:shadow-md transition-shadow duration-300">
+                {playlistVideos.length || 'Loading'} tracks
               </span>
             </div>
           </div>
           
           {playlistLoading ? (
-            <div className="text-center py-12">
-              <div className="relative">
-                <div className="animate-spin rounded-full h-12 w-12 border-4 border-purple-200 border-t-purple-600 mx-auto mb-4"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-2xl animate-pulse">🎵</div>
+            <div className="space-y-4">
+              {/* Enhanced loading state with shimmer */}
+              <div className="text-center py-8">
+                <div className="relative mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-2xl mx-auto flex items-center justify-center shadow-xl">
+                    <svg className="w-8 h-8 text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                  </div>
+                  <div className="absolute inset-0 bg-purple-500/20 rounded-2xl animate-ping opacity-30"></div>
+                </div>
+                <div className="bg-gradient-to-br from-purple-50/80 via-white/90 to-blue-50/80 rounded-2xl p-6 border border-purple-200/50 shadow-lg backdrop-blur-sm">
+                  <p className="text-sm font-bold text-gray-800 mb-2">Loading Your Music Collection</p>
+                  <p className="text-xs text-gray-500">Fetching playlist details and thumbnails...</p>
+                  <div className="mt-4 flex items-center justify-center space-x-1">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce delay-200"></div>
+                  </div>
                 </div>
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-4 border border-purple-200/50">
-                <p className="text-sm font-medium text-gray-700">Loading your awesome playlist...</p>
-                <p className="text-xs text-gray-500 mt-1">This might take a moment</p>
-              </div>
+              
+              {/* Skeleton loading items */}
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="flex space-x-4 p-4 rounded-2xl bg-gradient-to-br from-gray-50/80 to-white/90 border border-gray-200/50 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer"></div>
+                  <div className="w-20 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl animate-pulse"></div>
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg w-3/4 animate-pulse"></div>
+                    <div className="h-3 bg-gradient-to-r from-gray-200 to-gray-300 rounded w-1/2 animate-pulse"></div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : playlistVideos.length > 0 ? (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {playlistVideos.map((video, index) => (
                 <div
                   key={video.id}
                   onClick={() => handlePlaylistClick(index)}
-                  className={`flex space-x-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 group ${
+                  className={`group relative flex space-x-4 p-4 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden ${
                     index === playlistIndex 
-                      ? 'bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-2 border-gray-300 shadow-xl transform scale-[1.02]' 
-                      : 'hover:bg-gray-100 hover:shadow-lg hover:transform hover:scale-[1.01] border border-transparent hover:border-gray-200'
+                      ? 'bg-gradient-to-br from-blue-50/80 via-white/90 to-purple-50/80 border-2 border-blue-200/60 shadow-xl transform scale-[1.02]' 
+                      : 'bg-gradient-to-br from-white/80 to-gray-50/60 hover:from-gray-50/80 hover:to-white/90 border border-gray-200/50 hover:border-gray-300/60 hover:shadow-lg hover:scale-[1.01]'
                   }`}
                 >
+                  {/* Hover glow effect */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                    index === playlistIndex 
+                      ? 'bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5' 
+                      : 'bg-gradient-to-br from-gray-500/5 via-transparent to-blue-500/5'
+                  }`}></div>
+                  
                   {/* Thumbnail */}
-                  <div className="relative flex-shrink-0 group">
-                    <img 
-                      src={video.thumbnail} 
-                      alt={video.title}
-                      className="w-24 h-14 object-cover rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 border border-gray-200"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                    <div className="w-24 h-14 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center text-gray-400 text-xl hidden border border-gray-200">
-                      🎬
-                    </div>
-                    {index === playlistIndex && (
-                      <div className="absolute inset-0 bg-gray-500/25 rounded-xl border-2 border-gray-500 flex items-center justify-center shadow-lg">
-                        <div className="bg-gray-500 text-black rounded-full p-1.5 shadow-lg">
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z"/>
-                          </svg>
-                        </div>
+                  <div className="relative flex-shrink-0 z-10">
+                    <div className="relative overflow-hidden rounded-xl">
+                      <img 
+                        src={video.thumbnail} 
+                        alt={video.title}
+                        className="w-20 h-12 object-cover rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:brightness-110 border border-gray-200/50"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div className="w-20 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center text-gray-400 text-lg hidden border border-gray-200/50">
+                        🎵
                       </div>
-                    )}
+                      
+                      {/* Play overlay for current track */}
+                      {index === playlistIndex && (
+                        <div className="absolute inset-0 bg-blue-500/30 rounded-xl border-2 border-blue-400 flex items-center justify-center backdrop-blur-sm">
+                          <div className="bg-blue-500 text-white rounded-full p-1.5 shadow-lg animate-pulse">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Hover play button */}
+                      {index !== playlistIndex && (
+                        <div className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm">
+                          <div className="bg-white/90 text-gray-800 rounded-full p-1.5 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   
                   {/* Video Info */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-bold text-gray-900 line-clamp-2 leading-tight mb-2">
+                  <div className="flex-1 min-w-0 z-10">
+                    <h4 className="text-sm font-bold text-gray-900 group-hover:text-gray-800 line-clamp-2 leading-tight mb-2 transition-colors duration-300">
                       {video.title === 'Loading...' ? (
-                                              <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-pulse mr-3 shadow-sm"></div>
-                        <span className="text-gray-400 font-medium">Loading title...</span>
-                      </div>
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse mr-2"></div>
+                          <div className="h-3 bg-gradient-to-r from-gray-200 to-gray-300 rounded w-32 animate-pulse relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer"></div>
+                          </div>
+                        </div>
                       ) : (
                         video.title
                       )}
                     </h4>
-                    <p className="text-xs text-gray-600 truncate flex items-center mb-2">
-                      {video.channelTitle === 'Loading...' ? (
-                        <span className="text-gray-400 flex items-center">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse mr-2 shadow-sm"></div>
-                          <span className="font-medium">Loading channel...</span>
-                        </span>
-                      ) : (
-                        <>
-                          <svg className="w-4 h-4 mr-2 text-gray-400 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                          </svg>
-                          <span className="font-medium">{video.channelTitle}</span>
-                        </>
+                    
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors duration-300 flex items-center">
+                        {video.channelTitle === 'Loading...' ? (
+                          <div className="flex items-center">
+                            <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-pulse mr-2"></div>
+                            <div className="h-2 bg-gradient-to-r from-gray-200 to-gray-300 rounded w-20 animate-pulse relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer"></div>
+                            </div>
+                          </div>
+                        ) : (
+                          <>
+                            <svg className="w-3 h-3 mr-1.5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            <span className="font-medium truncate">{video.channelTitle}</span>
+                          </>
+                        )}
+                      </p>
+                      
+                      {index === playlistIndex && (
+                        <div className="flex items-center ml-2">
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse mr-2"></div>
+                          <span className="text-xs text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-full border border-blue-200 shadow-sm whitespace-nowrap">
+                            Now Playing
+                          </span>
+                        </div>
                       )}
-                    </p>
-                    {index === playlistIndex && (
-                      <div className="flex items-center">
-                        <div className="w-2.5 h-2.5 bg-gray-500 rounded-full animate-pulse mr-3 shadow-lg"></div>
-                        <span className="text-xs text-gray-700 font-bold bg-gray-100 px-3 py-1 rounded-full border border-gray-200 shadow-sm">
-                          Now Playing
-                        </span>
-                      </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 text-gray-500">
-              <div className="text-4xl mb-4 animate-bounce">🎬</div>
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200/50">
-                <p className="text-sm font-medium text-gray-700 mb-3">
-                  YouTube player loaded successfully!
+            <div className="text-center py-12">
+              <div className="relative mb-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl mx-auto flex items-center justify-center shadow-lg">
+                  <div className="text-3xl animate-bounce">🎵</div>
+                </div>
+                <div className="absolute inset-0 bg-gray-300/20 rounded-2xl animate-ping opacity-30"></div>
+              </div>
+              <div className="bg-gradient-to-br from-gray-50/80 via-white/90 to-gray-100/60 rounded-2xl p-6 border border-gray-200/60 shadow-lg backdrop-blur-sm">
+                <p className="text-sm font-bold text-gray-800 mb-2">
+                  Music Player Ready
+                </p>
+                <p className="text-xs text-gray-500 mb-4">
+                  YouTube player loaded successfully! Your playlist is ready to stream.
                 </p>
                 <a 
                   href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-gray-600 hover:text-gray-700 transition-all duration-200 font-medium bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300"
+                  className="group inline-flex items-center text-gray-700 hover:text-gray-800 transition-all duration-300 font-semibold bg-gradient-to-r from-white via-gray-50 to-white hover:from-gray-50 hover:to-gray-100 px-4 py-2.5 rounded-xl shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300"
                 >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  View full playlist
+                  View Full Playlist
                 </a>
               </div>
             </div>
