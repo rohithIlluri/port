@@ -113,8 +113,8 @@ function App() {
             </div>
 
             {/* Right Desktop Sidebar - Video Player */}
-            <div className="hidden xl:block w-96 flex-shrink-0">
-              <div className="sticky top-8 h-[calc(100vh-4rem)]">
+            <div className="hidden xl:block w-[800px] flex-shrink-0">
+              <div className="sticky top-8 h-[calc(80vh-2.2rem)]">
                 <ErrorBoundary>
                   <RightSidebar />
                 </ErrorBoundary>

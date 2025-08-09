@@ -215,25 +215,51 @@ const RightSidebar = () => {
   };
 
   const handlePlayPause = () => {
-    if (!playerRef.current) return;
-    if (isPlaying) {
-      playerRef.current.pauseVideo();
-    } else {
-      playerRef.current.playVideo();
+    console.log('Play/Pause clicked');
+    if (!playerRef.current || !isPlayerReady) {
+      console.log('Player not ready');
+      return;
+    }
+    try {
+      if (isPlaying) {
+        console.log('Pausing video');
+        playerRef.current.pauseVideo();
+      } else {
+        console.log('Playing video');
+        playerRef.current.playVideo();
+      }
+    } catch (error) {
+      console.error('Error controlling video:', error);
     }
   };
 
   const handleNext = () => {
-    if (playerRef.current) {
-      playerRef.current.nextVideo();
-      // Update will happen in onPlayerStateChange
+    console.log('Next clicked');
+    if (playerRef.current && isPlayerReady) {
+      try {
+        console.log('Going to next video');
+        playerRef.current.nextVideo();
+        // Update will happen in onPlayerStateChange
+      } catch (error) {
+        console.error('Error going to next video:', error);
+      }
+    } else {
+      console.log('Player not ready');
     }
   };
 
   const handlePrevious = () => {
-    if (playerRef.current) {
-      playerRef.current.previousVideo();
-      // Update will happen in onPlayerStateChange
+    console.log('Previous clicked');
+    if (playerRef.current && isPlayerReady) {
+      try {
+        console.log('Going to previous video');
+        playerRef.current.previousVideo();
+        // Update will happen in onPlayerStateChange
+      } catch (error) {
+        console.error('Error going to previous video:', error);
+      }
+    } else {
+      console.log('Player not ready');
     }
   };
 
@@ -308,12 +334,12 @@ const RightSidebar = () => {
       <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden h-full flex items-center justify-center backdrop-blur-sm">
         <div className="text-center p-8">
           <div className="relative mb-6">
-            <div className="animate-spin rounded-full h-16 w-16 border-4 border-purple-200 border-t-purple-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-gray-600 mx-auto"></div>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-3xl animate-pulse">🎬</div>
             </div>
           </div>
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200/50">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200/50">
             <p className="text-gray-700 font-semibold text-lg mb-2">Loading YouTube Player...</p>
             <p className="text-gray-500 text-sm">Getting everything ready for you</p>
           </div>
@@ -325,21 +351,39 @@ const RightSidebar = () => {
   return (
     <div className="bg-white rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden h-full flex flex-col backdrop-blur-sm">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 text-white p-5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm"></div>
-        <div className="relative flex items-center space-x-4">
-          <div className="text-3xl animate-pulse">🎬</div>
+      <div className="bg-gradient-to-r from-white/90 via-gray-50/80 to-gray-100/70 text-black p-6 relative overflow-hidden backdrop-blur-xl border-b border-gray-200/20 shadow-2xl">
+        {/* Enhanced liquid glass overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/5 via-black/3 to-transparent backdrop-blur-lg"></div>
+        
+        {/* Animated glass particles with more sophisticated animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-12 -left-12 w-24 h-24 bg-gradient-to-br from-black/10 to-black/5 rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-gradient-to-tl from-black/8 to-black/3 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-gradient-to-r from-black/6 to-black/4 rounded-full blur-lg animate-pulse delay-500"></div>
+          <div className="absolute top-1/4 right-1/4 w-8 h-8 bg-black/5 rounded-full blur-md animate-pulse delay-1500"></div>
+        </div>
+        
+        {/* Subtle animated border */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent"></div>
+        
+        {/* Content */}
+        <div className="relative flex items-center space-x-5 z-10">
+          <div className="relative">
+            <div className="text-4xl drop-shadow-2xl filter brightness-110">🎬</div>
+          </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold tracking-tight">YouTube Player</h2>
-            <p className="text-sm text-purple-100 mt-1">
+            <h2 className="text-2xl font-bold tracking-tight drop-shadow-lg bg-gradient-to-r from-black to-gray-700 bg-clip-text text-black">
+              YouTube Player
+            </h2>
+            <p className="text-sm text-gray-600 mt-2">
               <a 
                 href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-all duration-200 hover:underline flex items-center space-x-1"
+                className="hover:text-black transition-all duration-300 hover:underline flex items-center space-x-2 drop-shadow-sm group"
               >
-                <span>View Full Playlist</span>
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="group-hover:scale-105 transition-transform duration-200">View Full Playlist</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
@@ -351,10 +395,16 @@ const RightSidebar = () => {
       {/* YouTube Player */}
       <div 
         ref={containerRef}
-        className="relative bg-gradient-to-br from-gray-900 to-black flex-1 min-h-0 group cursor-pointer rounded-t-lg overflow-hidden"
-        onClick={handlePlayPause}
+        className="relative bg-gradient-to-br from-black/20 via-black/15 to-black/30 flex-1 min-h-0 group overflow-hidden shadow-inner"
       >
-        <div id="youtube-player" className="w-full h-full relative z-0 rounded-t-lg"></div>
+        {/* Subtle vignette effect */}
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/10 pointer-events-none z-5"></div>
+        
+        <div 
+          id="youtube-player" 
+          className="w-full h-full relative z-0 cursor-pointer" 
+          onClick={isPlaying ? handlePlayPause : undefined}
+        ></div>
 
         {/* YouTube Controls Overlay */}
         <div className={`absolute inset-0 z-10 transition-all duration-300 ${
@@ -363,15 +413,16 @@ const RightSidebar = () => {
           
           {/* Center Play Button */}
           {!isPlaying && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-md cursor-pointer" onClick={handlePlayPause}>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
                   handlePlayPause();
                 }}
-                className="bg-white/10 backdrop-blur-md text-white rounded-full p-6 hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-2xl border border-white/20"
+                className="bg-white/20 backdrop-blur-lg text-black rounded-full p-8 hover:bg-white/30 transition-all duration-300 hover:scale-110 shadow-2xl border border-white/40 hover:border-white/60 group"
               >
-                <svg className="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                <svg className="w-12 h-12 ml-1 relative z-10 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
               </button>
@@ -379,37 +430,38 @@ const RightSidebar = () => {
           )}
 
           {/* Bottom Controls */}
-          <div className="absolute bottom-0 left-0 right-0 p-5 space-y-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-sm">
+          <div className="absolute bottom-0 left-0 right-0 p-5 space-y-3 bg-gradient-to-t from-white/30 via-white/60 to-transparent backdrop-blur-md z-50">
             {/* Progress Bar */}
             <div 
-              className="w-full h-1.5 bg-white/20 rounded-full cursor-pointer hover:h-2 transition-all duration-300 group"
+              className="w-full h-1 bg-black/30 rounded-full cursor-pointer hover:h-1.5 transition-all duration-300 group shadow-inner backdrop-blur-sm"
               onClick={handleProgressClick}
             >
               <div 
-                className="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full relative shadow-lg"
+                className="h-full bg-gradient-to-r from-red-500 via-red-600 to-red-700 rounded-full relative shadow-lg"
                 style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
               >
-                <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg border-2 border-white"></div>
+                <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-xl border-2 border-white drop-shadow-lg backdrop-blur-sm"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full"></div>
               </div>
             </div>
 
             {/* Control Bar */}
-            <div className="flex items-center justify-between text-white">
-              <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between text-black relative z-50">
+              <div className="flex items-center space-x-5">
                 {/* Play/Pause */}
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
                     handlePlayPause();
                   }}
-                  className="p-3 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+                  className="group p-3.5 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 backdrop-blur-md border border-black/20 hover:border-white/40 shadow-lg hover:shadow-xl cursor-pointer transform-gpu"
                 >
                   {isPlaying ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
                   )}
@@ -421,9 +473,9 @@ const RightSidebar = () => {
                     e.stopPropagation();
                     handlePrevious();
                   }}
-                  className="p-2.5 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+                  className="group p-3 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 backdrop-blur-md border border-black/20 hover:border-white/40 shadow-lg hover:shadow-xl cursor-pointer transform-gpu"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300 group-hover:-translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
                   </svg>
                 </button>
@@ -434,46 +486,49 @@ const RightSidebar = () => {
                     e.stopPropagation();
                     handleNext();
                   }}
-                  className="p-2.5 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+                  className="group p-3 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 backdrop-blur-md border border-black/20 hover:border-white/40 shadow-lg hover:shadow-xl cursor-pointer transform-gpu"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300 group-hover:translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                   </svg>
                 </button>
 
                 {/* Volume */}
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-4">
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
                       handleVolumeChange(volume > 0 ? 0 : 100);
                     }}
-                    className="p-2.5 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+                    className="group p-3 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 backdrop-blur-md border border-black/20 hover:border-white/40 shadow-lg hover:shadow-xl cursor-pointer transform-gpu"
                   >
                     {volume === 0 ? (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300 group-hover:text-red-600" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
                       </svg>
                     ) : (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300 group-hover:text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
                       </svg>
                     )}
                   </button>
                   
                   <div 
-                    className="w-20 h-1.5 bg-white/30 rounded-full cursor-pointer hover:bg-white/40 transition-colors duration-200"
+                    className="relative w-24 h-2 bg-black/20 rounded-full cursor-pointer hover:bg-black/30 transition-all duration-300 shadow-inner hover:h-3 group"
                     onClick={handleVolumeClick}
                   >
                     <div 
-                      className="h-full bg-gradient-to-r from-white to-gray-200 rounded-full shadow-sm"
+                      className="h-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-full shadow-sm transition-all duration-300 group-hover:shadow-md relative overflow-hidden"
                       style={{ width: `${volume}%` }}
-                    ></div>
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full"></div>
+                      <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-lg border-2 border-white"></div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Time */}
-                <span className="text-sm text-white/90 font-medium bg-black/30 px-3 py-1 rounded-full backdrop-blur-sm">
+                <span className="text-sm text-black/95 font-semibold bg-white/80 px-4 py-2 rounded-full backdrop-blur-md border border-black/20 shadow-lg hover:bg-white/90 hover:shadow-xl transition-all duration-300">
                   {formatTime(currentTime)} / {formatTime(duration)}
                 </span>
               </div>
@@ -484,9 +539,9 @@ const RightSidebar = () => {
                   e.stopPropagation();
                   toggleFullscreen();
                 }}
-                className="p-2.5 hover:bg-white/20 rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
+                className="group p-3 hover:bg-white/20 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 backdrop-blur-md border border-black/20 hover:border-white/40 shadow-lg hover:shadow-xl cursor-pointer transform-gpu"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 drop-shadow-md group-hover:drop-shadow-lg transition-all duration-300 group-hover:text-green-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                 </svg>
               </button>
@@ -495,15 +550,15 @@ const RightSidebar = () => {
 
           {/* Video Title */}
           {currentVideoInfo && (
-            <div className="absolute top-5 left-5 right-5 bg-gradient-to-b from-black/80 via-black/60 to-transparent p-4 rounded-xl backdrop-blur-sm border border-white/10">
-              <h3 className="text-white text-lg font-bold truncate tracking-tight">
+            <div className="absolute top-6 left-6 right-6 bg-gradient-to-b from-white/90 via-white/70 to-transparent p-5 rounded-2xl backdrop-blur-md border border-black/20 shadow-2xl">
+              <h3 className="text-black text-xl font-bold truncate tracking-tight drop-shadow-lg">
                 {currentVideoInfo.title}
               </h3>
-              <p className="text-white/90 text-sm truncate mt-1 flex items-center">
-                <svg className="w-4 h-4 mr-2 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+              <p className="text-black/95 text-sm truncate mt-2 flex items-center">
+                <svg className="w-5 h-5 mr-3 text-black drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
-                {currentVideoInfo.author}
+                <span className="font-medium">{currentVideoInfo.author}</span>
               </p>
             </div>
           )}
@@ -511,20 +566,27 @@ const RightSidebar = () => {
       </div>
 
       {/* Playlist Section */}
-      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 to-white min-h-0 border-t border-gray-200/50 scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-gray-100 hover:scrollbar-thumb-purple-400">
-        <div className="p-5">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-lg font-bold text-gray-800 flex items-center">
-              <svg className="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-              </svg>
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-0 border-t border-gray-200/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-bold text-gray-800 flex items-center">
+              <div className="relative mr-3">
+                <svg className="w-6 h-6 text-gray-600 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+                <div className="absolute inset-0 w-6 h-6 text-gray-400 animate-ping opacity-20">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                </div>
+              </div>
               Your Playlist
             </h3>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               {playlistVideos.some(video => video.title === 'Loading...') && (
-                <div className="w-2.5 h-2.5 bg-purple-500 rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-gray-500 rounded-full animate-pulse shadow-lg"></div>
               )}
-              <span className="text-xs text-gray-600 bg-gradient-to-r from-purple-100 to-blue-100 px-3 py-1.5 rounded-full font-medium border border-purple-200/50">
+              <span className="text-sm text-gray-700 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 px-4 py-2 rounded-full font-semibold border border-gray-200/50 shadow-sm">
                 {playlistVideos.length || 'Loading'} videos
               </span>
             </div>
@@ -544,15 +606,15 @@ const RightSidebar = () => {
               </div>
             </div>
           ) : playlistVideos.length > 0 ? (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {playlistVideos.map((video, index) => (
                 <div
                   key={video.id}
                   onClick={() => handlePlaylistClick(index)}
-                  className={`flex space-x-4 p-3 rounded-xl cursor-pointer transition-all duration-300 group ${
+                  className={`flex space-x-4 p-4 rounded-2xl cursor-pointer transition-all duration-300 group ${
                     index === playlistIndex 
-                      ? 'bg-gradient-to-r from-purple-100 to-blue-100 border-2 border-purple-300 shadow-lg transform scale-[1.02]' 
-                      : 'hover:bg-gray-100 hover:shadow-md hover:transform hover:scale-[1.01] border border-transparent'
+                      ? 'bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 border-2 border-gray-300 shadow-xl transform scale-[1.02]' 
+                      : 'hover:bg-gray-100 hover:shadow-lg hover:transform hover:scale-[1.01] border border-transparent hover:border-gray-200'
                   }`}
                 >
                   {/* Thumbnail */}
@@ -560,19 +622,19 @@ const RightSidebar = () => {
                     <img 
                       src={video.thumbnail} 
                       alt={video.title}
-                      className="w-20 h-12 object-cover rounded-lg shadow-md group-hover:shadow-lg transition-all duration-300 border border-gray-200"
+                      className="w-24 h-14 object-cover rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 border border-gray-200"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'flex';
                       }}
                     />
-                    <div className="w-20 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-lg hidden border border-gray-200">
+                    <div className="w-24 h-14 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center text-gray-400 text-xl hidden border border-gray-200">
                       🎬
                     </div>
                     {index === playlistIndex && (
-                      <div className="absolute inset-0 bg-red-500/20 rounded-lg border-2 border-red-500 flex items-center justify-center">
-                        <div className="bg-red-500 text-white rounded-full p-1">
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute inset-0 bg-gray-500/25 rounded-xl border-2 border-gray-500 flex items-center justify-center shadow-lg">
+                        <div className="bg-gray-500 text-black rounded-full p-1.5 shadow-lg">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z"/>
                           </svg>
                         </div>
@@ -582,35 +644,35 @@ const RightSidebar = () => {
                   
                   {/* Video Info */}
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-tight mb-1">
+                    <h4 className="text-sm font-bold text-gray-900 line-clamp-2 leading-tight mb-2">
                       {video.title === 'Loading...' ? (
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse mr-2"></div>
-                          <span className="text-gray-400">Loading title...</span>
-                        </div>
+                                              <div className="flex items-center">
+                        <div className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-pulse mr-3 shadow-sm"></div>
+                        <span className="text-gray-400 font-medium">Loading title...</span>
+                      </div>
                       ) : (
                         video.title
                       )}
                     </h4>
-                    <p className="text-xs text-gray-600 truncate flex items-center mb-1">
+                    <p className="text-xs text-gray-600 truncate flex items-center mb-2">
                       {video.channelTitle === 'Loading...' ? (
                         <span className="text-gray-400 flex items-center">
-                          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-pulse mr-2"></div>
-                          Loading channel...
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse mr-2 shadow-sm"></div>
+                          <span className="font-medium">Loading channel...</span>
                         </span>
                       ) : (
                         <>
-                          <svg className="w-3 h-3 mr-1 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 mr-2 text-gray-400 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                           </svg>
-                          {video.channelTitle}
+                          <span className="font-medium">{video.channelTitle}</span>
                         </>
                       )}
                     </p>
                     {index === playlistIndex && (
                       <div className="flex items-center">
-                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse mr-2"></div>
-                        <span className="text-xs text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
+                        <div className="w-2.5 h-2.5 bg-gray-500 rounded-full animate-pulse mr-3 shadow-lg"></div>
+                        <span className="text-xs text-gray-700 font-bold bg-gray-100 px-3 py-1 rounded-full border border-gray-200 shadow-sm">
                           Now Playing
                         </span>
                       </div>
@@ -622,7 +684,7 @@ const RightSidebar = () => {
           ) : (
             <div className="text-center py-12 text-gray-500">
               <div className="text-4xl mb-4 animate-bounce">🎬</div>
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200/50">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200/50">
                 <p className="text-sm font-medium text-gray-700 mb-3">
                   YouTube player loaded successfully!
                 </p>
@@ -630,7 +692,7 @@ const RightSidebar = () => {
                   href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-purple-600 hover:text-purple-700 transition-all duration-200 font-medium bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md border border-purple-200 hover:border-purple-300"
+                  className="inline-flex items-center text-gray-600 hover:text-gray-700 transition-all duration-200 font-medium bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300"
                 >
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

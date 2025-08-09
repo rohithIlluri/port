@@ -1,14 +1,14 @@
 import React, { memo } from 'react';
-import Reveal from '../ui/Reveal';
+
 
 const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
   return (
     <div className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-black/[0.01] via-white to-black/[0.02] rounded-lg"></div>
-      <Reveal className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
+      <div className="relative bg-white/70 backdrop-blur-sm border border-black/5 rounded-lg shadow-sm hover:shadow-md transition-all duration-500 p-8 lg:p-10">
         <div className="relative z-20">
-          <Reveal as="h2" delay={50} className="text-2xl font-light mb-8 text-black/90">Projects</Reveal>
-          <Reveal delay={120} className="bg-white/80 backdrop-blur-sm border border-black/8 rounded-md p-6 space-y-6 shadow-md hover:shadow-lg transition-all duration-300">
+          <h2 className="text-2xl font-light mb-8 text-black/90">Projects</h2>
+          <div className="bg-white/80 backdrop-blur-sm border border-black/8 rounded-md p-6 space-y-6 shadow-md hover:shadow-lg transition-all duration-300">
             <div>
               <label htmlFor="project-select" className="block text-sm font-medium text-black/80 mb-4">
                 Select a Project
@@ -41,7 +41,7 @@ const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
             )}
 
             {selectedRepo && (
-              <Reveal delay={180} className="bg-white/80 backdrop-blur-sm border border-black/10 rounded-md p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
+              <div className="bg-white/80 backdrop-blur-sm border border-black/10 rounded-md p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold text-black/90">
                     {selectedRepo.name}
@@ -76,11 +76,11 @@ const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
                     </span>
                   </div>
                 </div>
-              </Reveal>
+              </div>
             )}
-          </Reveal>
+          </div>
         </div>
-      </Reveal>
+      </div>
     </div>
   );
 };

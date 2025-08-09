@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Reveal from '../ui/Reveal';
+
 import GitHubProfile from './GitHubProfile';
 import GitHubAchievements from './GitHubAchievements';
 import GitHubStatsGrid from './GitHubStatsGrid';
@@ -191,21 +191,21 @@ const GitHubStats = () => {
 
   return (
     <div className="space-y-8">
-      <Reveal delay={50}>
+      <div>
         <GitHubProfile profile={profile} />
-      </Reveal>
-      <Reveal delay={100}>
+      </div>
+      <div>
         <CertificationBadges />
-      </Reveal>
-      <Reveal delay={150}>
+      </div>
+      <div>
         <GitHubStatsGrid profile={profile} stats={stats} />
-      </Reveal>
-      <Reveal delay={200}>
+      </div>
+      <div>
         <GitHubAchievements achievements={achievements} />
-      </Reveal>
+      </div>
       
       {/* GitHub Badges */}
-      <Reveal delay={250} className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
+      <div className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
         <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Live Statistics</h4>
         <div className="space-y-6">
           <img
@@ -236,7 +236,7 @@ const GitHubStats = () => {
             }}
           />
         </div>
-      </Reveal>
+      </div>
     </div>
   );
 };
