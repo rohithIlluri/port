@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 
 const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
   return (
-    <div className="relative overflow-hidden liquid-wave group">
-      <div className="glass-card p-8 lg:p-10 relative z-20 hover:glow transition-all duration-500">
+    <div className="relative overflow-hidden liquid-wave group mt-2 sm:mt-3 lg:mt-4">
+      <div className="glass-card p-6 lg:p-8 relative z-20 hover:glow transition-all duration-500">
           <h2 className="text-2xl font-light mb-8 text-black/90 group-hover:text-black group-hover:scale-105 transition-all duration-300">Recent Work</h2>
           
           {loading && (

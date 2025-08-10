@@ -3,19 +3,18 @@ import React, { memo } from 'react';
 
 const Hero = () => {
   return (
-    <section id="about" className="py-8 relative liquid-wave group" aria-label="About section">
-      <div className="glass-card p-8 lg:p-10 relative z-20 hover:glow transition-all duration-500">
+    <section id="about" className="py-4 relative liquid-wave group" aria-label="About section">
+      <div className="glass-card p-6 lg:p-8 relative z-20 hover:glow transition-all duration-500">
         <div className="text-center lg:text-left">
-          <div className="mb-6 group-hover:scale-105 transition-transform duration-300">
+          {/* <div className="mb-6 group-hover:scale-105 transition-transform duration-300">
             <span className="text-sm font-medium text-black/70 uppercase tracking-wider group-hover:text-black/90 transition-colors duration-300">Welcome to my Portfolio</span>
-          </div>
+          </div> */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mb-8 leading-tight text-black/90 group-hover:text-black transition-colors duration-300">
-            Building the future through 
-            <span className="font-bold block text-black group-hover:scale-105 transition-transform duration-300">Code & Innovation</span>
+            Just
+            <span className="font-bold block text-black group-hover:scale-105 transition-transform duration-300">Ship it.</span>
           </h1>
           <p className="text-base lg:text-lg text-black/80 leading-relaxed mb-10 max-w-3xl mx-auto lg:mx-0 group-hover:text-black/90 transition-colors duration-300">
-            Graduate student passionate about creating minimalist, functional applications and exploring machine learning. 
-            I focus on building scalable, efficient, and elegant solutions that make a difference.
+            self taught developer, passionate about building products that make a difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start group-hover:scale-105 transition-transform duration-300">
             <a 

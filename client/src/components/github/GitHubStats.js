@@ -156,7 +156,6 @@ const CertificationBadges = () => {
 
 const GitHubStats = () => {
   const [profile, setProfile] = useState(null);
-  const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -196,38 +195,7 @@ const GitHubStats = () => {
         const profileData = await profileResponse.json();
         setProfile(profileData);
 
-        // Fetch repositories for additional stats
-        const reposResponse = await fetch('https://api.github.com/users/rohithIlluri/repos?per_page=100');
-        if (!reposResponse.ok) {
-          throw new Error(`GitHub repos API error: ${reposResponse.status}`);
-        }
-        const reposData = await reposResponse.json();
-        
-        // Calculate stats
-        const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-        const totalForks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0);
-        const languages = reposData.map(repo => repo.language).filter(Boolean);
-        const uniqueLanguages = [...new Set(languages)];
-        
-        // Calculate account age
-        const accountAge = Math.floor((new Date() - new Date(profileData.created_at)) / (1000 * 60 * 60 * 24 * 365));
-        
-        // Get recent activity
-        const recentRepos = reposData.filter(repo => {
-          const updated = new Date(repo.updated_at);
-          const sixMonthsAgo = new Date();
-          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-          return updated > sixMonthsAgo;
-        });
 
-        setStats({
-          totalStars,
-          totalForks,
-          totalRepos: reposData.length,
-          uniqueLanguages: uniqueLanguages.length,
-          accountAge,
-          recentActivity: recentRepos.length
-        });
 
         setLoading(false);
       } catch (error) {
@@ -346,7 +314,7 @@ const GitHubStats = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <div>
         <GitHubProfile profile={profile} />
       </div>

@@ -4,7 +4,7 @@ const GitHubAchievements = ({ achievements }) => {
   if (!achievements || achievements.length === 0) return null;
 
   return (
-    <div className="glass-card p-6 group hover:glow transition-all duration-500">
+    <div className="glass-card p-4 group hover:glow transition-all duration-500">
       <h4 className="text-xs font-medium uppercase tracking-wide text-black/80 mb-4 group-hover:text-black group-hover:scale-105 transition-all duration-300">GitHub Achievements</h4>
       <div className="space-y-3">
         {achievements.map((achievement, index) => (
