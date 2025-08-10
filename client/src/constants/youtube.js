@@ -21,15 +21,3 @@ export const YOUTUBE_PLAYER_CONFIG = {
   }
 };
 
-// YouTube thumbnail URL helper
-export const getYouTubeThumbnail = (videoId, quality = 'mqdefault') => {
-  return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
-};
-
-// YouTube watch URL helper  
-export const getYouTubeWatchUrl = (videoId) => {
-  return `https://www.youtube.com/watch?v=${videoId}`;
-};
-
-// Playlist URL
-export const YOUTUBE_PLAYLIST_URL = `https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`;

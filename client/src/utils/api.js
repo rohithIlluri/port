@@ -19,23 +19,7 @@ export const fetchGitHubRepos = async () => {
   }
 };
 
-/**
- * Fetch GitHub profile data
- * @returns {Promise<Object>} User profile data
- */
-export const fetchGitHubProfile = async () => {
-  try {
-    const response = await fetch(`${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`);
-    
-    if (!response.ok) {
-      throw new Error("Failed to fetch profile from GitHub API.");
-    }
-    
-    return await response.json();
-  } catch (error) {
-    throw new Error(`GitHub API Error: ${error.message}`);
-  }
-};
+
 
 /**
  * Load YouTube iframe API script

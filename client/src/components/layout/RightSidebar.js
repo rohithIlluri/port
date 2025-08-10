@@ -35,7 +35,7 @@ const RightSidebar = ({ hideHeader = false }) => {
           };
         }
       } catch (error) {
-        console.log(`Could not fetch info for video ${videoId}:`, error);
+        // Error fetching video info
       }
       
       return {
@@ -61,7 +61,7 @@ const RightSidebar = ({ hideHeader = false }) => {
         // Small delay between requests to be respectful
         await new Promise(resolve => setTimeout(resolve, 150));
       } catch (error) {
-        console.log(`Error loading video ${i}:`, error);
+        // Error loading video
       }
     }
   };
@@ -142,7 +142,7 @@ const RightSidebar = ({ hideHeader = false }) => {
           setCurrentTime(time);
           setDuration(dur);
         } catch (error) {
-          console.log('Error getting time:', error);
+          // Error getting time
         }
       }, 1000);
     }
@@ -150,7 +150,6 @@ const RightSidebar = ({ hideHeader = false }) => {
   }, [isPlaying]);
 
   const onPlayerReady = (event) => {
-    console.log('YouTube player ready');
     try {
       const videoData = playerRef.current.getVideoData();
       setCurrentVideoInfo({
@@ -177,7 +176,6 @@ const RightSidebar = ({ hideHeader = false }) => {
       }
       setPlaylistLoading(false);
     } catch (error) {
-      console.log('Could not get initial video data:', error);
       setPlaylistLoading(false);
     }
   };
@@ -209,57 +207,45 @@ const RightSidebar = ({ hideHeader = false }) => {
           ));
         }
       } catch (error) {
-        console.log('Could not get video data:', error);
+        // Error getting video data
       }
     }
   };
 
   const handlePlayPause = () => {
-    console.log('Play/Pause clicked');
     if (!playerRef.current || !isPlayerReady) {
-      console.log('Player not ready');
       return;
     }
     try {
       if (isPlaying) {
-        console.log('Pausing video');
         playerRef.current.pauseVideo();
       } else {
-        console.log('Playing video');
         playerRef.current.playVideo();
       }
     } catch (error) {
-      console.error('Error controlling video:', error);
+      // Error controlling video
     }
   };
 
   const handleNext = () => {
-    console.log('Next clicked');
     if (playerRef.current && isPlayerReady) {
       try {
-        console.log('Going to next video');
         playerRef.current.nextVideo();
         // Update will happen in onPlayerStateChange
       } catch (error) {
-        console.error('Error going to next video:', error);
+        // Error going to next video
       }
-    } else {
-      console.log('Player not ready');
     }
   };
 
   const handlePrevious = () => {
-    console.log('Previous clicked');
     if (playerRef.current && isPlayerReady) {
       try {
-        console.log('Going to previous video');
         playerRef.current.previousVideo();
         // Update will happen in onPlayerStateChange
       } catch (error) {
-        console.error('Error going to previous video:', error);
+        // Error going to previous video
       }
-    } else {
-      console.log('Player not ready');
     }
   };
 
@@ -309,7 +295,7 @@ const RightSidebar = ({ hideHeader = false }) => {
             videoId: videoData.video_id
           });
         } catch (error) {
-          console.log('Could not get video data:', error);
+          // Error getting video data
         }
       }, 500);
     }
@@ -370,17 +356,12 @@ const RightSidebar = ({ hideHeader = false }) => {
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse shadow-lg group-hover:scale-125 transition-transform duration-300"></div>
               </div>
               <div className="flex-1">
-                <h2 className="text-2xl font-bold text-gray-800 tracking-tight group-hover:text-gray-900 group-hover:scale-105 transition-all duration-300">
+                <h2 className="text-2xl font-bold text-gray-800 tracking-tight transition-all duration-300">
                   YouTube Music
                 </h2>
                 <p className="text-sm text-gray-600 mt-1 group-hover:text-gray-700 group-hover:font-medium transition-all duration-300">Personal playlist & music collection</p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                <span className="text-xs text-red-600 font-medium bg-red-50 px-2 py-1 rounded-full border border-red-200">LIVE</span>
               </div>
             </div>
             
@@ -408,8 +389,7 @@ const RightSidebar = ({ hideHeader = false }) => {
         ref={containerRef}
         className="relative bg-gradient-to-br from-black/20 via-black/15 to-black/30 flex-1 min-h-0 group overflow-hidden shadow-inner"
       >
-        {/* Subtle vignette effect */}
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/10 pointer-events-none z-5"></div>
+
         
         <div 
           id="youtube-player" 

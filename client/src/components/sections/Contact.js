@@ -3,8 +3,8 @@ import React, { memo } from 'react';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-8 relative overflow-hidden liquid-wave group" aria-label="Contact section">
-      <div className="glass-card p-8 lg:p-10 relative z-20 hover:glow transition-all duration-500">
+    <section id="contact" className="py-4 relative overflow-hidden liquid-wave group mt-2 sm:mt-3 lg:mt-4" aria-label="Contact section">
+      <div className="glass-card p-6 lg:p-8 relative z-20 hover:glow transition-all duration-500">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl font-light mb-6 text-black/90 group-hover:text-black group-hover:scale-105 transition-all duration-300">Get In Touch</h2>
           <div className="w-16 h-px bg-black/30 mx-auto mb-6 group-hover:w-24 group-hover:bg-black/50 transition-all duration-300" />

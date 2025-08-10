@@ -178,7 +178,7 @@ function App() {
         </div>
       )}
 
-      <main className="py-10 xl:py-16 relative pb-24 sm:pb-20 lg:pb-10 xl:pb-16" role="main">
+      <main className="py-6 xl:py-8 relative pb-12 sm:pb-16 lg:pb-8 xl:pb-12" role="main">
         <div className="max-w-none mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-4 lg:gap-8 justify-center">
             {/* Left Desktop Sidebar - Fixed width for consistency */}
@@ -191,13 +191,13 @@ function App() {
             </div>
 
             {/* Main Content - Mobile first, centered with max width */}
-            <div className="flex-1 max-w-4xl mx-auto xl:mx-0 space-y-8 sm:space-y-12 lg:space-y-16">
+            <div className="flex-1 max-w-4xl mx-auto xl:mx-0">
               <ErrorBoundary>
                 <Hero />
               </ErrorBoundary>
               
               {/* Enhanced Mobile GitHub Stats Quick View */}
-              <div className="lg:hidden relative bg-gradient-to-br from-gray-50/80 via-white/90 to-gray-100/60 backdrop-blur-sm rounded-3xl border border-gray-200/60 p-6 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+              <div className="lg:hidden relative bg-gradient-to-br from-gray-50/80 via-white/90 to-gray-100/60 backdrop-blur-sm rounded-3xl border border-gray-200/60 p-4 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group mt-2 sm:mt-3 lg:mt-4">
                 {/* Background gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-500/5 via-transparent to-gray-700/10 pointer-events-none"></div>
                 {/* Subtle animated background elements */}
@@ -248,7 +248,7 @@ function App() {
               </ErrorBoundary>
               
               {/* Projects Section */}
-              <section id="projects" className="py-4 scroll-offset" aria-label="Projects">
+              <section id="projects" className="scroll-offset" aria-label="Projects">
                 <ErrorBoundary>
                   <Projects 
                     repos={repos}
@@ -276,7 +276,7 @@ function App() {
           </div>
 
           {/* Tablet GitHub Stats Section (lg to xl breakpoint) */}
-          <div className="hidden lg:block xl:hidden mt-8">
+          <div className="hidden lg:block xl:hidden mt-4">
             <div className="max-w-4xl mx-auto">
               <div className="bg-gradient-to-r from-white/90 via-white/95 to-white/90 backdrop-blur-lg rounded-2xl border border-gray-200/50 shadow-xl overflow-hidden">
                 {/* GitHub Stats Tab */}
