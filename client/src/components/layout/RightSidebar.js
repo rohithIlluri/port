@@ -49,10 +49,10 @@ const RightSidebar = ({ hideHeader = false }) => {
       try {
         const videoInfo = await fetchVideoInfo(playlist[i], i);
         
-        // Update state with the new video info
+        // Update state with the new video info using the unique ID
         setPlaylistVideos(prevVideos => 
-          prevVideos.map((video, index) => 
-            index === i 
+          prevVideos.map((video) => 
+            video.originalId === playlist[i] 
               ? { ...video, title: videoInfo.title, channelTitle: videoInfo.channelTitle }
               : video
           )
@@ -161,8 +161,10 @@ const RightSidebar = ({ hideHeader = false }) => {
       // Get playlist info from the player
       const playlist = playerRef.current.getPlaylist();
       if (playlist && playlist.length > 0) {
+        // Create unique playlist data with index-based IDs to handle duplicate video IDs
         const playlistData = playlist.map((videoId, index) => ({
-          id: videoId,
+          id: `${videoId}-${index}`, // Make ID unique by combining videoId with index
+          originalId: videoId, // Keep original video ID for API calls
           title: 'Loading...',
           channelTitle: 'Loading...',
           thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
@@ -317,7 +319,7 @@ const RightSidebar = ({ hideHeader = false }) => {
 
   if (!isPlayerReady) {
     return (
-      <div className="glass-card rounded-2xl overflow-hidden h-full flex items-center justify-center liquid-wave">
+      <div className="bg-white rounded-2xl overflow-hidden h-full flex items-center justify-center shadow-lg border border-gray-200">
         <div className="text-center p-8">
           <div className="relative mb-6">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-gray-200 border-t-gray-600 mx-auto"></div>
@@ -335,10 +337,10 @@ const RightSidebar = ({ hideHeader = false }) => {
   }
 
   return (
-    <div className={`glass overflow-hidden h-full flex flex-col ${hideHeader ? 'rounded-none border-none shadow-none' : 'rounded-2xl liquid-wave'}`}>
+    <div className={`bg-white overflow-hidden h-full flex flex-col ${hideHeader ? 'rounded-none border-none shadow-none' : 'rounded-2xl shadow-lg border border-gray-200'}`}>
       {/* Enhanced Header - Conditionally rendered */}
       {!hideHeader && (
-        <div className="relative bg-gradient-to-br from-red-500/10 via-pink-500/5 to-purple-500/10 backdrop-blur-xl text-black p-6 overflow-hidden border-b border-gray-200/30 shadow-xl group hover:glow transition-all duration-500">
+        <div className="relative bg-gradient-to-br from-red-50 via-pink-50 to-purple-50 text-black p-6 overflow-hidden border-b border-gray-200 shadow-xl group hover:shadow-2xl transition-all duration-500">
           {/* Background decoration */}
           <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-red-500/15 to-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-tl from-purple-500/10 to-blue-500/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
@@ -371,7 +373,7 @@ const RightSidebar = ({ hideHeader = false }) => {
                   href={`https://www.youtube.com/playlist?list=${YOUTUBE_PLAYLIST_ID}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/btn inline-flex items-center px-3 py-1.5 bg-white/60 hover:bg-white/80 rounded-lg border border-gray-200/60 hover:border-gray-300/60 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                  className="group/btn inline-flex items-center px-3 py-1.5 bg-white hover:bg-gray-50 rounded-lg border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-lg hover:scale-105"
                 >
                   <svg className="w-4 h-4 mr-2 text-gray-500 group-hover/btn:text-gray-700 group-hover/btn:scale-110 group-hover/btn:rotate-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -557,7 +559,7 @@ const RightSidebar = ({ hideHeader = false }) => {
       </div>
 
       {/* Enhanced Playlist Section */}
-      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50/50 via-white/80 to-gray-50/50 min-h-0 border-t border-gray-200/30 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400 backdrop-blur-sm">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-50/50 via-white/80 to-gray-50/50 min-h-0 border-t border-gray-200/30 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
@@ -623,7 +625,7 @@ const RightSidebar = ({ hideHeader = false }) => {
             <div className="space-y-3">
               {playlistVideos.map((video, index) => (
                 <div
-                  key={video.id}
+                  key={`${video.id}-${index}`}
                   onClick={() => handlePlaylistClick(index)}
                   className={`group relative flex space-x-4 p-4 rounded-2xl cursor-pointer transition-all duration-500 overflow-hidden ${
                     index === playlistIndex 

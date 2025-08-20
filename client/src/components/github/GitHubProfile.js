@@ -4,7 +4,7 @@ const GitHubProfile = ({ profile }) => {
   if (!profile) return null;
 
   return (
-    <div className="glass-card text-black p-4 group hover:glow transition-all duration-500">
+    <div className="bg-white text-black p-4 group shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-500">
       <div className="text-center">
         <img
           src={profile.avatar_url}

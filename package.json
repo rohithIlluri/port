@@ -1,22 +1,19 @@
 {
-  "name": "port-fullstack",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "Full-stack chat application with React client and Node.js WebSocket server",
+  "description": "Modern portfolio website built with React, featuring GitHub integration and YouTube music player",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && node index.js",
+    "dev": "cd client && PORT=3001 npm start",
     "client": "cd client && PORT=3001 npm start",
-    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "install": "npm install && cd client && npm install",
     "build": "cd client && npm run build",
-    "clean": "rm -rf node_modules client/node_modules server/node_modules client/build",
-    "setup": "npm run install-all",
-    "status": "node check-status.js"
+    "clean": "rm -rf node_modules client/node_modules client/build",
+    "setup": "npm run install",
+    "start": "npm run dev"
   },
-  "keywords": ["chat", "websocket", "react", "nodejs"],
-  "author": "",
+  "keywords": ["portfolio", "react", "github", "youtube", "tailwindcss"],
+  "author": "Rohith Illuri",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  }
+  "devDependencies": {}
 } 
