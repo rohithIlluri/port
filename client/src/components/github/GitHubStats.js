@@ -55,7 +55,7 @@ const CertificationBadges = () => {
   return (
     <>
       {/* Mobile Enhanced Style */}
-      <div className="lg:hidden relative glass-card p-8 overflow-hidden group liquid-wave">
+      <div className="lg:hidden relative bg-white p-8 overflow-hidden group shadow-lg border border-gray-200 rounded-2xl">
         {/* Background decoration */}
         <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl"></div>
         <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-tl from-green-500/10 to-blue-500/10 rounded-full blur-xl"></div>
@@ -78,7 +78,7 @@ const CertificationBadges = () => {
               <div 
                 key={index}
                 onClick={() => handleBadgeClick(badge.url)}
-                className="group/badge relative bg-gradient-to-br from-white/80 via-white/90 to-gray-50/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-200/50 hover:border-gray-300/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl cursor-pointer overflow-hidden"
+                className="group/badge relative bg-gradient-to-br from-white/80 via-white/90 to-gray-50/80 p-6 rounded-2xl border border-gray-200/50 hover:border-gray-300/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl cursor-pointer overflow-hidden"
               >
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
@@ -132,24 +132,24 @@ const CertificationBadges = () => {
       </div>
 
       {/* Desktop Simple Style */}
-      <div className="hidden lg:block glass-card p-8 liquid-wave">
-      <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
-      <div className="grid grid-cols-2 gap-4">
-        {badges.map((badge, index) => (
-          <div 
-            key={index}
-            onClick={() => handleBadgeClick(badge.url)}
-            className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
-          >
-            <img 
-              src={badge.src} 
-              alt={badge.alt}
-              className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
-            />
-          </div>
-        ))}
+      <div className="hidden lg:block bg-white p-8 shadow-lg border border-gray-200 rounded-2xl">
+        <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
+        <div className="grid grid-cols-2 gap-4">
+          {badges.map((badge, index) => (
+            <div 
+              key={index}
+              onClick={() => handleBadgeClick(badge.url)}
+              className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
+            >
+              <img 
+                src={badge.src} 
+                alt={badge.alt}
+                className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };
@@ -195,8 +195,6 @@ const GitHubStats = () => {
         const profileData = await profileResponse.json();
         setProfile(profileData);
 
-
-
         setLoading(false);
       } catch (error) {
         console.error('Error fetching GitHub data:', error);
@@ -214,7 +212,7 @@ const GitHubStats = () => {
         {/* Mobile Enhanced Loading States */}
         <div className="lg:hidden space-y-8">
           {/* Enhanced loading state for profile */}
-          <div className="relative bg-gradient-to-br from-white/90 via-white/95 to-white/90 backdrop-blur-xl p-8 border border-gray-200/60 rounded-2xl shadow-xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-white/90 via-white/95 to-white/90 p-8 border border-gray-200/60 rounded-2xl shadow-xl overflow-hidden">
             <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl animate-pulse"></div>
             <div className="animate-pulse space-y-6">
               <div className="flex items-center space-x-4">
@@ -237,7 +235,7 @@ const GitHubStats = () => {
           </div>
 
           {/* Loading state for certifications */}
-          <div className="relative bg-gradient-to-br from-white/90 via-white/95 to-white/90 backdrop-blur-xl p-8 border border-gray-200/60 rounded-2xl shadow-xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-white/90 via-white/95 to-white/90 p-8 border border-gray-200/60 rounded-2xl shadow-xl overflow-hidden">
             <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-full blur-xl animate-pulse"></div>
             <div className="animate-pulse space-y-6">
               <div className="flex items-center space-x-3">
@@ -258,30 +256,28 @@ const GitHubStats = () => {
               </div>
             </div>
           </div>
-
-
         </div>
 
         {/* Desktop Simple Loading States */}
         <div className="hidden lg:block space-y-8">
-      <div className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
-        <div className="animate-pulse space-y-6">
-          <div className="h-20 w-20 bg-black/10 rounded-full mx-auto"></div>
-          <div className="h-4 bg-black/10 rounded-lg"></div>
-          <div className="h-3 bg-black/10 rounded-lg w-3/4 mx-auto"></div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="h-16 bg-black/10 rounded-lg"></div>
-            <div className="h-16 bg-black/10 rounded-lg"></div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="h-16 bg-black/10 rounded-lg"></div>
-            <div className="h-16 bg-black/10 rounded-lg"></div>
-          </div>
-          <div className="h-12 bg-black/10 rounded-lg"></div>
+          <div className="bg-white/80 p-8 border border-black/10 rounded-lg shadow-lg">
+            <div className="animate-pulse space-y-6">
+              <div className="h-20 w-20 bg-black/10 rounded-full mx-auto"></div>
+              <div className="h-4 bg-black/10 rounded-lg"></div>
+              <div className="h-3 bg-black/10 rounded-lg w-3/4 mx-auto"></div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-16 bg-black/10 rounded-lg"></div>
+                <div className="h-16 bg-black/10 rounded-lg"></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="h-16 bg-black/10 rounded-lg"></div>
+                <div className="h-16 bg-black/10 rounded-lg"></div>
+              </div>
+              <div className="h-12 bg-black/10 rounded-lg"></div>
             </div>
           </div>
           
-          <div className="bg-white/80 backdrop-blur-sm p-8 border border-black/10 rounded-lg shadow-lg">
+          <div className="bg-white/80 p-8 border border-black/10 rounded-lg shadow-lg">
             <div className="h-4 bg-black/10 rounded-lg w-1/3 mb-6"></div>
             <div className="grid grid-cols-2 gap-4">
               {[...Array(5)].map((_, i) => (
@@ -289,8 +285,6 @@ const GitHubStats = () => {
               ))}
             </div>
           </div>
-          
-
         </div>
       </div>
     );
@@ -298,7 +292,7 @@ const GitHubStats = () => {
 
   if (error) {
     return (
-      <div className="bg-white/80 backdrop-blur-sm p-8 border border-red-200 rounded-lg shadow-lg">
+      <div className="bg-white/80 p-8 border border-red-200 rounded-lg shadow-lg">
         <div className="text-center">
           <div className="text-red-500 text-sm mb-4">⚠️ Error</div>
           <p className="text-black/70 text-sm">{error}</p>
@@ -324,10 +318,6 @@ const GitHubStats = () => {
       <div>
         <GitHubAchievements achievements={achievements} />
       </div>
-      
-
-
-
     </div>
   );
 };

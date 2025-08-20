@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
-import { 
-  SiJavascript, 
-  SiTypescript, 
-  SiReact, 
-  SiNodedotjs, 
-  SiPython, 
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNodedotjs,
+  SiPython,
   SiHtml5,
   SiCss3,
   SiTailwindcss,
@@ -16,6 +16,21 @@ import {
   SiGraphql
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
+
+// Memoized Skill Item Component
+const SkillItem = memo(({ skill, index, getSkillIcon }) => (
+  <div
+    className="group/skill bg-white p-4 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl hover:scale-110 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center cursor-pointer"
+    style={{ animationDelay: `${index * 50}ms` }}
+  >
+    <div className="mb-3 group-hover/skill:scale-125 group-hover/skill:rotate-12 transition-all duration-300">
+      {getSkillIcon(skill)}
+    </div>
+    <span className="text-sm font-medium text-black/80 group-hover/skill:text-black group-hover/skill:font-bold transition-all duration-300">
+      {skill}
+    </span>
+  </div>
+));
 
 const Skills = () => {
   const skills = [
@@ -82,23 +97,17 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-4 relative overflow-hidden liquid-wave group mt-2 sm:mt-3 lg:mt-4" aria-label="Skills section">
-      <div className="glass-card p-6 lg:p-8 relative z-20 hover:glow transition-all duration-500">
+      <div className="bg-white p-6 lg:p-8 relative z-20 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-500">
         <h2 className="text-2xl font-light mb-8 text-black/90 group-hover:text-black group-hover:scale-105 transition-all duration-300">Skills</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {skills.map((skill, index) => (
-            <div
+            <SkillItem
               key={skill}
-              className="group/skill glass-card p-4 hover:glow hover:scale-110 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center cursor-pointer"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-                <div className="mb-3 group-hover/skill:scale-125 group-hover/skill:rotate-12 transition-all duration-300">
-                  {getSkillIcon(skill)}
-                </div>
-                <span className="text-sm font-medium text-black/80 group-hover/skill:text-black group-hover/skill:font-bold transition-all duration-300">
-                  {skill}
-                </span>
-              </div>
-            ))}
+              skill={skill}
+              index={index}
+              getSkillIcon={getSkillIcon}
+            />
+          ))}
           </div>
         </div>
       </section>

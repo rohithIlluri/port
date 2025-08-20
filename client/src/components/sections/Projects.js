@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
   return (
     <div className="relative overflow-hidden liquid-wave group mt-2 sm:mt-3 lg:mt-4">
-      <div className="glass-card p-6 lg:p-8 relative z-20 hover:glow transition-all duration-500">
+      <div className="bg-white p-6 lg:p-8 relative z-20 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-500">
           <h2 className="text-2xl font-light mb-8 text-black/90 group-hover:text-black group-hover:scale-105 transition-all duration-300">Recent Work</h2>
           
           {loading && (
@@ -22,10 +22,19 @@ const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
           {!loading && !error && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {repos.slice(0, 6).map((repo) => (
-                <div
+                <article
                   key={repo.id}
                   onClick={() => handleRepoClick(repo.name)}
-                  className="group/project glass-card p-6 cursor-pointer hover:glow hover:scale-105 hover:-translate-y-2 transition-all duration-300"
+                  className="group/project bg-white p-6 cursor-pointer shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl hover:scale-105 hover:-translate-y-2 transition-all duration-300"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View details for ${repo.name} project`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleRepoClick(repo.name);
+                    }
+                  }}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-lg font-bold text-black/90 group-hover/project:text-black group-hover/project:scale-105 transition-all duration-300 line-clamp-1">
@@ -65,13 +74,13 @@ const Projects = ({ repos, loading, error, selectedRepo, handleRepoClick }) => {
                     </div>
                     <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           )}
 
           {selectedRepo && (
-            <div className="mt-8 glass-card p-6">
+            <div className="mt-8 bg-white p-6 shadow-lg border border-gray-200 rounded-2xl">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-bold text-black/90">
                   {selectedRepo.name}
