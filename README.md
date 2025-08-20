@@ -1,4 +1,4 @@
-<<<<<<< feature/liquid-glass-hover-effects
+
 # Personal Portfolio Website
 
 A modern, responsive portfolio website built with React, featuring GitHub integration, project showcase, skills display, and an embedded YouTube music player.
@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with React, featuring GitHub integr
 
 ## Project Structure
 
-```
+
 port/
 ├── client/          # React frontend application
 │   ├── src/         # React source code
@@ -25,7 +25,6 @@ port/
 └── package.json     # Root scripts and dev dependencies
 ```
 
-<<<<<<< feature/liquid-glass-hover-effects
 ## Features
 
 - 🎨 **Modern Design**: Glass-morphism aesthetic with smooth animations
