@@ -569,7 +569,7 @@ const RightSidebar = ({ hideHeader = false }) => {
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-gray-800 tracking-tight">Your Playlist</h3>
+                <h3 className="text-lg font-bold text-gray-800 tracking-tight">My Playlist</h3>
                 <p className="text-sm text-gray-500 mt-0.5">Curated music collection</p>
               </div>
             </div>

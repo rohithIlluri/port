@@ -27,23 +27,23 @@ const CertificationBadges = () => {
     },
     { 
       src: badge3, 
-      alt: 'Python for Data Science',
-      title: 'Python for Data Science',
+      alt: 'Getting Started with Cloud for the Enterprise',
+      title: 'Getting Started with Cloud for the Enterprise',
       issuer: 'IBM - Coursera',
       url: 'https://www.credly.com/badges/b6b4c668-1553-4747-9dbc-106c9b227b68'
     },
     { 
       src: badge4, 
-      alt: 'Cloud Computing Enterprise',
-      title: 'Getting Started with Cloud for Enterprise',
+      alt: 'Enterprise Data Science in Practice',
+      title: 'Enterprise Data Science in Practice',
       issuer: 'IBM SkillsBuild',
       url: 'https://www.credly.com/badges/0f3eeb62-a422-43b8-82e1-bbbc570f0e4c'
     },
     { 
       src: badge5, 
-      alt: 'Enterprise Data Science',
-      title: 'Enterprise Data Science in Practice',
-      issuer: 'IBM SkillsBuild',
+      alt: 'AWS Cloud Quest: Cloud Practitioner',
+      title: 'AWS Cloud Quest: Cloud Practitioner',
+      issuer: 'AWS Skill Builder',
       url: 'https://www.credly.com/badges/e8faf7e9-4bdb-4572-ae0f-5b548854c07b'
     },
   ];
@@ -78,36 +78,30 @@ const CertificationBadges = () => {
               <div 
                 key={index}
                 onClick={() => handleBadgeClick(badge.url)}
-                className="group/badge relative bg-gradient-to-br from-white/80 via-white/90 to-gray-50/80 p-6 rounded-2xl border border-gray-200/50 hover:border-gray-300/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-xl cursor-pointer overflow-hidden"
+                className="group/badge relative bg-gradient-to-br from-white/80 via-white/90 to-gray-50/80 p-6 rounded-2xl border border-gray-200/50 active:border-blue-400/60 active:scale-[0.98] transition-all duration-200 cursor-pointer overflow-hidden touch-manipulation"
               >
-                {/* Hover glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500"></div>
+                {/* Active state glow effect for mobile */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 active:opacity-100 transition-opacity duration-200"></div>
                 
                 <div className="relative z-10 flex flex-col items-center text-center">
                   <div className="relative mb-4">
                     <img 
                       src={badge.src} 
                       alt={badge.alt}
-                      className="w-20 h-20 object-contain transition-all duration-500 group-hover/badge:scale-110 group-hover/badge:brightness-110"
+                      className="w-20 h-20 object-contain transition-all duration-200 active:scale-105 active:brightness-110"
                     />
-                    {/* Badge shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover/badge:opacity-100 group-hover/badge:animate-pulse rounded-full"></div>
+                    {/* Badge shine effect on active state */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 active:opacity-100 active:animate-pulse rounded-full"></div>
                   </div>
                   
-                  <h5 className="text-sm font-bold text-gray-800 leading-tight mb-2 group-hover/badge:text-gray-900 transition-colors duration-300">
+                  <h5 className="text-sm font-bold text-gray-800 leading-tight mb-2 active:text-blue-600 transition-colors duration-200">
                     {badge.title}
                   </h5>
-                  <p className="text-xs text-gray-500 font-medium bg-gray-100/60 px-3 py-1 rounded-full border border-gray-200/50">
+                  <p className="text-xs text-gray-500 font-medium bg-gray-100/60 px-3 py-1 rounded-full border border-gray-200/50 active:bg-blue-100/60 active:border-blue-200/60 transition-all duration-200">
                     {badge.issuer}
                   </p>
                   
-                  {/* External link indicator */}
-                  <div className="mt-3 flex items-center text-xs text-blue-600 opacity-0 group-hover/badge:opacity-100 transition-all duration-300">
-                    <span className="mr-1">View Certificate</span>
-                    <svg className="w-3 h-3 group-hover/badge:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </div>
+
                 </div>
               </div>
             ))}
@@ -139,12 +133,12 @@ const CertificationBadges = () => {
             <div 
               key={index}
               onClick={() => handleBadgeClick(badge.url)}
-              className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 transition-all duration-300 hover:scale-105 hover:shadow-lg group cursor-pointer"
+              className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 active:from-blue-100/20 active:to-blue-200/20 transition-all duration-300 hover:scale-105 active:scale-[0.98] hover:shadow-lg active:shadow-xl group cursor-pointer touch-manipulation"
             >
               <img 
                 src={badge.src} 
                 alt={badge.alt}
-                className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-auto object-contain transition-transform duration-300 hover:scale-110 active:scale-105"
               />
             </div>
           ))}

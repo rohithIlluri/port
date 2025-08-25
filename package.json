@@ -6,10 +6,9 @@
   "scripts": {
     "dev": "cd client && PORT=3001 npm start",
     "client": "cd client && PORT=3001 npm start",
-    "install": "npm install && cd client && npm install",
     "build": "cd client && npm run build",
     "clean": "rm -rf node_modules client/node_modules client/build",
-    "setup": "npm run install",
+    "setup": "npm install && cd client && npm install",
     "start": "npm run dev"
   },
   "keywords": ["portfolio", "react", "github", "youtube", "tailwindcss"],
