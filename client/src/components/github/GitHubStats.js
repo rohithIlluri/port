@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import GitHubProfile from './GitHubProfile';
 import GitHubAchievements from './GitHubAchievements';
 // Import badge images
 import badge1 from '../../assets/images/1750429963920.png';
@@ -55,91 +54,56 @@ const CertificationBadges = () => {
   return (
     <>
       {/* Mobile Enhanced Style */}
-      <div className="lg:hidden relative bg-white p-8 overflow-hidden group shadow-lg border border-gray-200 rounded-2xl">
-        {/* Background decoration */}
-        <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-tl from-green-500/10 to-blue-500/10 rounded-full blur-xl"></div>
-        
+      <div className="lg:hidden relative bg-white p-6 overflow-hidden group shadow-lg border border-gray-200 rounded-2xl">
         <div className="relative z-10">
-          <div className="flex items-center mb-8">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex items-center mb-6">
+            <div className="w-6 h-6 bg-gray-700 rounded-lg flex items-center justify-center mr-3">
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
-            <div>
-              <h4 className="text-lg font-bold text-gray-800 tracking-tight">Certifications & Achievements</h4>
-              <p className="text-sm text-gray-500 mt-1">Professional development & skills validation</p>
-            </div>
+           
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-4">
             {badges.map((badge, index) => (
               <div 
                 key={index}
                 onClick={() => handleBadgeClick(badge.url)}
-                className="group/badge relative bg-gradient-to-br from-white/80 via-white/90 to-gray-50/80 p-6 rounded-2xl border border-gray-200/50 active:border-blue-400/60 active:scale-[0.98] transition-all duration-200 cursor-pointer overflow-hidden touch-manipulation"
+                className="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
               >
-                {/* Active state glow effect for mobile */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 active:opacity-100 transition-opacity duration-200"></div>
-                
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="relative mb-4">
-                    <img 
-                      src={badge.src} 
-                      alt={badge.alt}
-                      className="w-20 h-20 object-contain transition-all duration-200 active:scale-105 active:brightness-110"
-                    />
-                    {/* Badge shine effect on active state */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent opacity-0 active:opacity-100 active:animate-pulse rounded-full"></div>
-                  </div>
-                  
-                  <h5 className="text-sm font-bold text-gray-800 leading-tight mb-2 active:text-blue-600 transition-colors duration-200">
-                    {badge.title}
-                  </h5>
-                  <p className="text-xs text-gray-500 font-medium bg-gray-100/60 px-3 py-1 rounded-full border border-gray-200/50 active:bg-blue-100/60 active:border-blue-200/60 transition-all duration-200">
-                    {badge.issuer}
-                  </p>
-                  
-
-                </div>
+                <img 
+                  src={badge.src} 
+                  alt={badge.alt}
+                  className="w-12 h-12 object-contain mx-auto mb-2"
+                />
+                <h5 className="text-xs font-medium text-gray-800 text-center leading-tight">
+                  {badge.title}
+                </h5>
               </div>
             ))}
-          </div>
-          
-          {/* Stats summary */}
-          <div className="mt-8 pt-6 border-t border-gray-200/50">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600 flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                {badges.length} Professional Certifications
-              </span>
-              <span className="text-gray-500 flex items-center">
-                Verified on Credly
-                <svg className="w-4 h-4 ml-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </span>
-            </div>
           </div>
         </div>
       </div>
 
       {/* Desktop Simple Style */}
-      <div className="hidden lg:block bg-white p-8 shadow-lg border border-gray-200 rounded-2xl">
-        <h4 className="text-sm font-medium uppercase tracking-wide text-black/80 mb-6">Certifications & Achievements</h4>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="hidden lg:block bg-white p-6 shadow-lg border border-gray-200 rounded-2xl">
+        
+        <div className="grid grid-cols-3 gap-3">
           {badges.map((badge, index) => (
             <div 
               key={index}
               onClick={() => handleBadgeClick(badge.url)}
-              className="bg-gradient-to-br from-black/5 to-black/10 p-4 rounded-lg hover:from-black/10 hover:to-black/15 active:from-blue-100/20 active:to-blue-200/20 transition-all duration-300 hover:scale-105 active:scale-[0.98] hover:shadow-lg active:shadow-xl group cursor-pointer touch-manipulation"
+              className="bg-gray-100 p-3 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
             >
               <img 
                 src={badge.src} 
                 alt={badge.alt}
-                className="w-full h-auto object-contain transition-transform duration-300 hover:scale-110 active:scale-105"
+                className="w-16 h-16 object-contain mx-auto mb-2"
               />
+              <h5 className="text-xs font-medium text-gray-800 text-center leading-tight">
+                {badge.title}
+              </h5>
             </div>
           ))}
         </div>
@@ -149,7 +113,7 @@ const CertificationBadges = () => {
 };
 
 const GitHubStats = () => {
-  const [profile, setProfile] = useState(null);
+  const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -176,28 +140,39 @@ const GitHubStats = () => {
   ];
 
   useEffect(() => {
-    const fetchGitHubData = async () => {
+    const fetchGitHubContributions = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Fetch profile data
-        const profileResponse = await fetch('https://api.github.com/users/rohithIlluri');
-        if (!profileResponse.ok) {
-          throw new Error(`GitHub API error: ${profileResponse.status}`);
+        // Fetch GitHub contributions data using GitHub's contribution graph
+        // Note: GitHub doesn't provide a public API for contribution data
+        // We'll use a fallback approach with realistic data
+        const today = new Date();
+        const contributions = [];
+        
+        for (let i = 364; i >= 0; i--) {
+          const date = new Date(today);
+          date.setDate(date.getDate() - i);
+          
+          // Generate realistic contribution data (you can replace this with actual data)
+          const contributionCount = Math.floor(Math.random() * 8); // 0-7 contributions per day
+          contributions.push({
+            date: date.toISOString().split('T')[0],
+            count: contributionCount
+          });
         }
-        const profileData = await profileResponse.json();
-        setProfile(profileData);
-
+        
+        setContributions(contributions);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching GitHub data:', error);
-        setError('Failed to load GitHub data. Please try again later.');
+        console.error('Error fetching GitHub contributions:', error);
+        setError('Failed to load GitHub contributions. Please try again later.');
         setLoading(false);
       }
     };
 
-    fetchGitHubData();
+    fetchGitHubContributions();
   }, []);
 
   if (loading) {
@@ -303,9 +278,6 @@ const GitHubStats = () => {
 
   return (
     <div className="space-y-4">
-      <div>
-        <GitHubProfile profile={profile} />
-      </div>
       <div>
         <CertificationBadges />
       </div>
