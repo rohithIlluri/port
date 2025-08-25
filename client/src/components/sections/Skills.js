@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { COMPONENT_STYLES, FONT_SIZES } from '../../constants/theme';
 import {
   SiJavascript,
   SiTypescript,
@@ -20,8 +21,7 @@ import { FaJava } from 'react-icons/fa';
 // Memoized Skill Item Component
 const SkillItem = memo(({ skill, index, getSkillIcon }) => (
   <div
-    className="group/skill bg-white p-4 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl hover:scale-110 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center cursor-pointer"
-    style={{ animationDelay: `${index * 50}ms` }}
+    className="group/skill bg-gray-100 p-4 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer hover:scale-105 hover:-translate-y-1 transition-all duration-300"
   >
     <div className="mb-3 group-hover/skill:scale-125 group-hover/skill:rotate-12 transition-all duration-300">
       {getSkillIcon(skill)}
@@ -96,10 +96,10 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-4 relative overflow-hidden liquid-wave group mt-2 sm:mt-3 lg:mt-4" aria-label="Skills section">
-      <div className="bg-white p-6 lg:p-8 relative z-20 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl transition-all duration-500">
-        <h2 className="text-2xl font-light mb-8 text-black/90 group-hover:text-black group-hover:scale-105 transition-all duration-300">Skills</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+    <section id="skills" className={COMPONENT_STYLES.section.base} aria-label="Skills section">
+      <div className={COMPONENT_STYLES.section.container}>
+        <h2 className={COMPONENT_STYLES.section.heading}>Skills</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {skills.map((skill, index) => (
             <SkillItem
               key={skill}
@@ -108,9 +108,9 @@ const Skills = () => {
               getSkillIcon={getSkillIcon}
             />
           ))}
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 };
 
