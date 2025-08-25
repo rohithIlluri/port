@@ -13,7 +13,7 @@ const Hero = () => {
           <h2 className={`${FONT_SIZES.lg} font-bold text-black mb-3`}>about</h2>
           <div className="space-y-2 text-black/70">
             <p>tldr;self-taught developer by shipping things on the internet</p>
-            <p>into tech and physics – things that shape the expanding universe</p>
+            <p>into tech and physics – things that shape the universe</p>
             <p>fascinated by space, science, and ideas that expand the mind</p>
           </div>
         </div>
