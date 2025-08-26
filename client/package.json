@@ -21,6 +21,7 @@
     "eject": "react-scripts eject",
     "tailwind:init": "tailwindcss init -p",
     "predeploy": "npm run build",
+    "postbuild": "cp .nojekyll build/",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
