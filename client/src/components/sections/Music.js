@@ -1,7 +1,15 @@
 import React, { memo, useState, useEffect } from 'react';
-import { COMPONENT_STYLES, FONT_SIZES } from '../../constants/theme';
+import { COMPONENT_STYLES } from '../../constants/theme';
 import { MUSIC_ARTISTS } from '../../constants/spotify';
 import { fetchArtistData, getArtistImageUrl } from '../../utils/spotify';
+
+// Local image mapping using public folder (no import issues)
+const LOCAL_ARTIST_IMAGES = {
+  '0YC192cP3KPCRWx8zr8MfZ': '/artists/hans-zimmer.jpg', // Hans Zimmer
+  '3WrFJ7ztbogyGnTHbHJFl2': '/artists/the-beatles.jpg', // The Beatles
+  '1mYsTxnqsietFxj1OgoGbG': '/artists/ar-rahman.jpg', // A.R. Rahman
+  '6XyY86QOPPrYVGvF9ch6wz': '/artists/linkin-park.jpg', // Linkin Park
+};
 
 const Music = () => {
   const [artistsData, setArtistsData] = useState({});
@@ -29,22 +37,22 @@ const Music = () => {
       <div className={COMPONENT_STYLES.section.container}>
         <h2 className={COMPONENT_STYLES.section.heading}>Music</h2>
        
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {MUSIC_ARTISTS.map((artist) => {
             const artistData = artistsData[artist.id];
-            const imageUrl = artistData && artistData.images && artistData.images.length > 0 ? getArtistImageUrl(artistData, 'small') : null;
+            const imageUrl = artistData && artistData.images && artistData.images.length > 0 ? getArtistImageUrl(artistData, 'small') : LOCAL_ARTIST_IMAGES[artist.id];
             
             return (
               <div 
                 key={artist.id}
                 onClick={() => handleArtistClick(artist.spotifyUrl)}
-                className="flex items-center space-x-3 p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group"
+                className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group"
               >
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={`${artist.name} poster`}
-                    className="w-12 h-12 rounded-full object-cover shadow-sm"
+                    className="w-16 h-16 rounded-full object-cover shadow-sm"
                     onError={(e) => {
                       console.log('Image failed to load:', imageUrl);
                       e.target.style.display = 'none';
@@ -55,12 +63,12 @@ const Music = () => {
                     }}
                   />
                 ) : null}
-                <div className={`w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 text-lg font-bold ${imageUrl ? 'hidden' : 'flex'}`}>
+                <div className={`w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 text-xl font-bold ${imageUrl ? 'hidden' : 'flex'}`}>
                   {artist.initials}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-black text-sm">{artist.name}</h3>
-                  <p className="text-gray-600 text-xs">{artist.description}</p>
+                  <h3 className="font-bold text-black text-base">{artist.name}</h3>
+                  <p className="text-gray-600 text-sm">{artist.description}</p>
                 </div>
               </div>
             );

@@ -29,7 +29,7 @@ const FavoriteMovies = () => {
         <p className="text-black/70 text-sm mb-6">
           Movies beyond the mainstream.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {FAVORITE_MOVIES.map((movie) => {
             const movieData = moviesData[movie.id];
             const posterUrl = movieData ? getMoviePosterUrl(movieData, 'small') : null;
@@ -38,25 +38,25 @@ const FavoriteMovies = () => {
               <div 
                 key={movie.id}
                 onClick={() => handleMovieClick(movie.tmdbUrl)}
-                className="flex items-center space-x-3 p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group"
+                className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group"
               >
                 {posterUrl ? (
                   <img 
                     src={posterUrl} 
                     alt={`${movie.name} poster`}
-                    className="w-12 h-12 rounded-lg object-cover shadow-sm"
+                    className="w-16 h-16 rounded-lg object-cover shadow-sm"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
                   />
                 ) : null}
-                <div className={`w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-700 text-lg font-bold ${posterUrl ? 'hidden' : 'flex'}`}>
+                <div className={`w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center text-gray-700 text-xl font-bold ${posterUrl ? 'hidden' : 'flex'}`}>
                   {movie.initials}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-black text-sm">{movie.name}</h3>
-                  <p className="text-gray-600 text-xs">{movie.description}</p>
+                  <h3 className="font-bold text-black text-base">{movie.name}</h3>
+                  <p className="text-gray-600 text-sm">{movie.description}</p>
                 </div>
               </div>
             );

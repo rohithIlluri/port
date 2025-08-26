@@ -13,6 +13,7 @@ const Sidebar = lazy(() => import("./components/layout/Sidebar"));
 const Music = lazy(() => import("./components/sections/Music"));
 const FavoriteMovies = lazy(() => import("./components/sections/FavoriteMovies"));
 const GitHubStats = lazy(() => import("./components/sections/GitHubStats"));
+const Stats = lazy(() => import("./components/sections/Stats"));
 
 function App() {
   const [repos, setRepos] = useState([]);
@@ -207,6 +208,26 @@ function App() {
               </ErrorBoundary>
             </Suspense>
 
+            {/* Projects Section - Moved here after Hero */}
+            <section id="projects" className="scroll-offset" aria-label="Projects">
+              <Suspense fallback={
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-200 border-t-gray-600 mx-auto mb-4"></div>
+                  <p className="text-gray-600">Loading projects...</p>
+                </div>
+              }>
+                <ErrorBoundary>
+                  <Projects
+                    repos={repos}
+                    loading={loading}
+                    error={error}
+                    selectedRepo={selectedRepo}
+                    handleRepoClick={handleRepoClick}
+                  />
+                </ErrorBoundary>
+              </Suspense>
+            </section>
+
             {/* Certifications Section */}
             <section id="certifications" className="mb-12">
               <h2 className={COMPONENT_STYLES.section.heading}>Certifications</h2>
@@ -264,25 +285,17 @@ function App() {
               </ErrorBoundary>
             </Suspense>
 
-            {/* Projects Section */}
-            <section id="projects" className="scroll-offset" aria-label="Projects">
-              <Suspense fallback={
-                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-200 border-t-gray-600 mx-auto mb-4"></div>
-                  <p className="text-gray-600">Loading projects...</p>
-                </div>
-              }>
-                <ErrorBoundary>
-                  <Projects
-                    repos={repos}
-                    loading={loading}
-                    error={error}
-                    selectedRepo={selectedRepo}
-                    handleRepoClick={handleRepoClick}
-                  />
-                </ErrorBoundary>
-              </Suspense>
-            </section>
+            {/* Stats Section */}
+            <Suspense fallback={
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-200 border-t-gray-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading stats...</p>
+              </div>
+            }>
+              <ErrorBoundary>
+                <Stats />
+              </ErrorBoundary>
+            </Suspense>
           </div>
         </div>
       </main>
