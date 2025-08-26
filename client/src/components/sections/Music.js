@@ -5,7 +5,7 @@ import { fetchArtistData, getArtistImageUrl } from '../../utils/spotify';
 
 // Local image mapping using public folder (no import issues)
 const LOCAL_ARTIST_IMAGES = {
-  '0YC192cP3KPCRWx8zr8MfZ': '/artists/hans-zimmer.jpg', // Hans Zimmer
+  '711MCceyCBcFnzjGY4Q7Un': '/artists/ac-dc.jpg', // ac/dc
   '3WrFJ7ztbogyGnTHbHJFl2': '/artists/the-beatles.jpg', // The Beatles
   '1mYsTxnqsietFxj1OgoGbG': '/artists/ar-rahman.jpg', // A.R. Rahman
   '6XyY86QOPPrYVGvF9ch6wz': '/artists/linkin-park.jpg', // Linkin Park
@@ -46,13 +46,13 @@ const Music = () => {
               <div 
                 key={artist.id}
                 onClick={() => handleArtistClick(artist.spotifyUrl)}
-                className="flex items-center space-x-4 p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group"
+                className="flex items-center space-x-6 p-8 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer group min-h-[140px]"
               >
                 {imageUrl ? (
                   <img 
                     src={imageUrl} 
                     alt={`${artist.name} poster`}
-                    className="w-16 h-16 rounded-full object-cover shadow-sm"
+                    className="w-24 h-24 rounded-full object-cover shadow-sm"
                     onError={(e) => {
                       console.log('Image failed to load:', imageUrl);
                       e.target.style.display = 'none';
@@ -63,12 +63,12 @@ const Music = () => {
                     }}
                   />
                 ) : null}
-                <div className={`w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 text-xl font-bold ${imageUrl ? 'hidden' : 'flex'}`}>
+                <div className={`w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center text-gray-700 text-3xl font-bold ${imageUrl ? 'hidden' : 'flex'}`}>
                   {artist.initials}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-black text-base">{artist.name}</h3>
-                  <p className="text-gray-600 text-sm">{artist.description}</p>
+                  <h3 className="font-bold text-black text-xl mb-2">{artist.name}</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed">{artist.description}</p>
                 </div>
               </div>
             );

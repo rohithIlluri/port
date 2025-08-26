@@ -95,19 +95,18 @@ export const COMPONENT_STYLES = {
   input: {
     base: 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200',
     error: 'border-red-500 focus:ring-red-500',
-  }
-};
+  },
 
-// Font sizes consistent with the design
-export const FONT_SIZES = {
-  xs: 'text-xs',      // 0.75rem
-  sm: 'text-sm',      // 0.875rem
-  base: 'text-base',  // 1rem
-  lg: 'text-lg',      // 1.125rem
-  xl: 'text-xl',      // 1.25rem
-  '2xl': 'text-2xl',  // 1.5rem
-  '3xl': 'text-3xl',  // 1.875rem
-  '4xl': 'text-4xl',  // 2.25rem
-  '5xl': 'text-5xl',  // 3rem
-  '6xl': 'text-6xl',  // 3.75rem
+  fontSizes: {
+    xs: 'text-xs',      // 0.75rem
+    sm: 'text-sm',      // 0.875rem
+    base: 'text-base',  // 1rem
+    lg: 'text-lg',      // 1.125rem
+    xl: 'text-xl',      // 1.25rem
+    '2xl': 'text-2xl',  // 1.5rem
+    '3xl': 'text-3xl',  // 1.875rem
+    '4xl': 'text-4xl',  // 2.25rem
+    '5xl': 'text-5xl',  // 3rem
+    '6xl': 'text-6xl',  // 3.75rem
+  }
 };

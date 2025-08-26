@@ -37,17 +37,21 @@ const Hero = () => {
     const githubEyes = document.querySelectorAll('#github-icon .eyes');
     masterTimeline.to(githubEyes, { opacity: 1, duration: 0.3 }, '-=1.0');
     
-    const githubBlink = gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 2 });
-    githubBlink.to(githubEyes, { opacity: 0, duration: 0.1 })
-               .to(githubEyes, { opacity: 1, duration: 0.1 });
+    const githubBlink = gsap.timeline({ repeat: -1, repeatDelay: 1.5, delay: 1.5 });
+    githubBlink.to(githubEyes, { opacity: 0, duration: 0.06 })
+               .to(githubEyes, { opacity: 1, duration: 0.06 })
+               .to(githubEyes, { opacity: 0, duration: 0.06 })
+               .to(githubEyes, { opacity: 1, duration: 0.06 });
 
     // Discord Eyes
     const discordEyes = document.querySelectorAll('#discord-icon .discord-eyes');
     masterTimeline.to(discordEyes, { opacity: 1, duration: 0.3 }, '-=1.0');
     
-    const discordBlink = gsap.timeline({ repeat: -1, repeatDelay: 4, delay: 2.5 });
-    discordBlink.to(discordEyes, { opacity: 0, duration: 0.1 })
-                .to(discordEyes, { opacity: 1, duration: 0.1 });
+    const discordBlink = gsap.timeline({ repeat: -1, repeatDelay: 2, delay: 2 });
+    discordBlink.to(discordEyes, { opacity: 0, duration: 0.06 })
+                .to(discordEyes, { opacity: 1, duration: 0.06 })
+                .to(discordEyes, { opacity: 0, duration: 0.06 })
+                .to(discordEyes, { opacity: 1, duration: 0.06 });
   }, []);
 
   return (
@@ -58,9 +62,9 @@ const Hero = () => {
         </h1>
         
         <div className="mb-8">
-          <h2 className={`${COMPONENT_STYLES.fontSizes.lg} font-bold text-black mb-3`}>about</h2>
+          <h2 className={`${COMPONENT_STYLES.fontSizes.lg} font-bold text-black mb-3`}>tldr; </h2>
           <div className="space-y-2 text-black/70">
-            <p>tldr;self-taught developer by shipping things on the internet</p>
+            <p>self-taught developer by shipping things on the internet</p>
             <p>into tech and physics – things that shape the universe</p>
             <p>fascinated by space, science, and ideas that expand the mind</p>
           </div>
@@ -71,7 +75,7 @@ const Hero = () => {
           <div className="flex space-x-4">
             {/* Twitter/X */}
             <a
-              href="https://twitter.com/yourusername"
+              href="https://twitter.com/notforgrind"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg"
@@ -100,7 +104,7 @@ const Hero = () => {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/sree-naga-illuri"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg"
@@ -129,7 +133,7 @@ const Hero = () => {
 
             {/* GitHub */}
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/rohithIlluri"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg"
@@ -160,7 +164,7 @@ const Hero = () => {
 
             {/* Discord */}
             <a
-              href="https://discord.gg/yourinvite"
+              href="https://discord.com/users/tars9791"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg"
@@ -191,7 +195,7 @@ const Hero = () => {
 
             {/* Email */}
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:rohith.illuri@gmail.com"
               className="group relative w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center text-white hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-lg"
               aria-label="Send email"
             >

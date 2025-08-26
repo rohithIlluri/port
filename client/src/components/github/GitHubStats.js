@@ -56,14 +56,7 @@ const CertificationBadges = () => {
       {/* Mobile Enhanced Style */}
       <div className="lg:hidden relative bg-white p-6 overflow-hidden group shadow-lg border border-gray-200 rounded-2xl">
         <div className="relative z-10">
-          <div className="flex items-center mb-6">
-            <div className="w-6 h-6 bg-gray-700 rounded-lg flex items-center justify-center mr-3">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-            </div>
-           
-          </div>
+
           
           <div className="grid grid-cols-2 gap-4">
             {badges.map((badge, index) => (
@@ -113,7 +106,6 @@ const CertificationBadges = () => {
 };
 
 const GitHubStats = () => {
-  const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -145,25 +137,9 @@ const GitHubStats = () => {
         setLoading(true);
         setError(null);
 
-        // Fetch GitHub contributions data using GitHub's contribution graph
-        // Note: GitHub doesn't provide a public API for contribution data
-        // We'll use a fallback approach with realistic data
-        const today = new Date();
-        const contributions = [];
+        // Simulate loading delay for better UX
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
-        for (let i = 364; i >= 0; i--) {
-          const date = new Date(today);
-          date.setDate(date.getDate() - i);
-          
-          // Generate realistic contribution data (you can replace this with actual data)
-          const contributionCount = Math.floor(Math.random() * 8); // 0-7 contributions per day
-          contributions.push({
-            date: date.toISOString().split('T')[0],
-            count: contributionCount
-          });
-        }
-        
-        setContributions(contributions);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching GitHub contributions:', error);

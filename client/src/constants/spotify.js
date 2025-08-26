@@ -9,11 +9,11 @@ export const SPOTIFY_CONFIG = {
 // Music artists with their Spotify IDs and descriptions
 export const MUSIC_ARTISTS = [
   {
-    id: '0YC192cP3KPCRWx8zr8MfZ', // Hans Zimmer
-    name: 'Hans Zimmer',
-    description: 'THE GOAT',
-    initials: 'HZ',
-    spotifyUrl: 'https://open.spotify.com/artist/0YC192cP3KPCRWx8zr8MfZ'
+    id: '711MCceyCBcFnzjGY4Q7Un', // AC/DC
+    name: 'AC/DC',
+    description: 'Beer in one hand, Blood in the other',
+    initials: 'AC',
+    spotifyUrl: 'https://open.spotify.com/artist/711MCceyCBcFnzjGY4Q7Un'
   },
   {
     id: '3WrFJ7ztbogyGnTHbHJFl2', // The Beatles

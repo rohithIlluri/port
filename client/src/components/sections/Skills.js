@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { COMPONENT_STYLES, FONT_SIZES } from '../../constants/theme';
+import { COMPONENT_STYLES } from '../../constants/theme';
 import {
   SiJavascript,
   SiTypescript,

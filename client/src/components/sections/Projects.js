@@ -124,53 +124,53 @@ const Projects = ({ repos, loading, error }) => {
             {filteredRepos.map((repo) => {
               const repoInfo = getRepoInfo(repo);
               return (
-                <article
-                  key={repo.id}
+              <article
+                key={repo.id}
                   onClick={() => window.open(repo.html_url, '_blank')}
                   className="group/project bg-white p-6 shadow-lg border border-gray-200 rounded-2xl hover:shadow-xl hover:scale-105 hover:-translate-y-2 hover:border-gray-300 transition-all duration-300 cursor-pointer"
-                  role="button"
-                  tabIndex={0}
+                role="button"
+                tabIndex={0}
                   aria-label={`View ${repo.name} on GitHub`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
                       window.open(repo.html_url, '_blank');
-                    }
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className={`${COMPONENT_STYLES.fontSizes.lg} font-bold text-black/90 group-hover/project:text-black group-hover/project:scale-105 transition-all duration-300 line-clamp-1`}>
-                      {repo.name}
-                    </h3>
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="opacity-0 group-hover/project:opacity-100 transition-all duration-300 p-2 hover:bg-black/10 hover:scale-110 rounded hover:shadow-lg"
-                    >
-                      <svg className="w-4 h-4 text-black/60 hover:text-black transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  </div>
-                  
-                  <p className="text-black/70 text-sm leading-relaxed mb-4 line-clamp-3 group-hover/project:text-black/80 group-hover/project:font-medium transition-all duration-300">
+                  }
+                }}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className={`${COMPONENT_STYLES.fontSizes.lg} font-bold text-black/90 group-hover/project:text-black group-hover/project:scale-105 transition-all duration-300 line-clamp-1`}>
+                    {repo.name}
+                  </h3>
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="opacity-0 group-hover/project:opacity-100 transition-all duration-300 p-2 hover:bg-black/10 hover:scale-110 rounded hover:shadow-lg"
+                  >
+                    <svg className="w-4 h-4 text-black/60 hover:text-black transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+                
+                <p className="text-black/70 text-sm leading-relaxed mb-4 line-clamp-3 group-hover/project:text-black/80 group-hover/project:font-medium transition-all duration-300">
                     {repoInfo.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between text-xs text-black/60">
-                    <div className="flex items-center space-x-3">
+                </p>
+                
+                <div className="flex items-center justify-between text-xs text-black/60">
+                  <div className="flex items-center space-x-3">
                       {repoInfo.language && (
-                        <span className="flex items-center">
+                      <span className="flex items-center">
                           {getLanguageIcon(repoInfo.language)}
                           <span className="ml-2">{repoInfo.language}</span>
-                        </span>
-                      )}
-                    </div>
-                    <span>{new Date(repoInfo.updated).toLocaleDateString()}</span>
+                      </span>
+                    )}
                   </div>
-                </article>
+                    <span>{new Date(repoInfo.updated).toLocaleDateString()}</span>
+                </div>
+              </article>
               );
             })}
           </div>

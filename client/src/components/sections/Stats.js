@@ -4,7 +4,7 @@ import { COMPONENT_STYLES } from '../../constants/theme';
 const Stats = () => {
   const stats = [
     { label: 'Deadlift PR', value: '340 lbs' },
-    { label: 'Bench Press', value: '110 lbs' },
+    { label: 'Bench Press', value: '150 lbs' },
     { label: 'Run', value: '11.32 miles' },
     { label: 'Typing 30s', value: '95 wpm' },
     { label: 'Typing 15s', value: '103.13 wpm' },

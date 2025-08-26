@@ -1,8 +1,8 @@
 import { TMDB_CONFIG, TMDB_ENDPOINTS } from '../constants/tmdb';
 
-// Direct movie poster URLs (fallback when API is not available)
+// Local movie poster images (fallback when API is not available)
 const MOVIE_POSTERS = {
-  27205: 'https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg', // Inception
+  24: '/kill-bill-poster.jpg', // Kill Bill: Vol. 1 - local image
   155: 'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg', // The Dark Knight
   157336: 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', // Interstellar
   680: 'https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg', // Pulp Fiction
@@ -48,6 +48,11 @@ export const fetchMovieData = async (movieId) => {
 export const getMoviePosterUrl = (movieData, size = 'medium') => {
   if (!movieData || !movieData.poster_path) {
     return null;
+  }
+
+  // If we have a local poster image, use it
+  if (MOVIE_POSTERS[movieData.id] && MOVIE_POSTERS[movieData.id].startsWith('/')) {
+    return MOVIE_POSTERS[movieData.id];
   }
 
   // If we have a direct poster URL, use it

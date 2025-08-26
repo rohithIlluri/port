@@ -9,12 +9,12 @@ export const TMDB_CONFIG = {
 // Favorite movies with their TMDB IDs and descriptions
 export const FAVORITE_MOVIES = [
   {
-    id: 27205, // Inception
-    name: 'Inception',
-    description: 'Mind-bending sci-fi thriller',
-    initials: 'IN',
-    tmdbUrl: 'https://www.themoviedb.org/movie/27205',
-    year: 2010
+    id: 24, // Kill Bill: Vol. 1
+    name: 'Kill Bill: Vol. 1',
+    description: 'swords and revenge',
+    initials: 'KB',
+    tmdbUrl: 'https://www.themoviedb.org/movie/24-kill-bill-vol-1',
+    year: 2003
   },
   {
     id: 155, // The Dark Knight
