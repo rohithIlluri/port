@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import { COMPONENT_STYLES, FONT_SIZES } from './constants/theme';
+import { COMPONENT_STYLES } from './constants/theme';
 
 // Lazy load components for better performance
 const Hero = lazy(() => import("./components/sections/Hero"));
@@ -19,7 +19,6 @@ function App() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedRepo, setSelectedRepo] = useState(null);
   const [githubContributions, setGithubContributions] = useState([]);
 
   useEffect(() => {
@@ -175,11 +174,7 @@ function App() {
     fetchGitHubData();
   }, []);
 
-  const handleRepoClick = (repo) => {
-    setSelectedRepo(repo);
-  };
 
-  const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
 
   return (
     <div className="min-h-screen bg-white">
@@ -190,8 +185,8 @@ function App() {
             <div className="flex space-x-4">
               <a href="#" className="px-4 py-2 bg-gray-800 text-white rounded-full text-sm font-medium">home</a>
               <a href="#projects" className="px-4 py-2 text-gray-800 hover:text-gray-600 text-sm font-medium">projects</a>
-              <a href="#" className="px-4 py-2 text-gray-800 hover:text-gray-600 text-sm font-medium">blogs</a>
-              <a href="#" className="px-4 py-2 text-gray-800 hover:text-gray-600 text-sm font-medium">components</a>
+              {/* <a href="#" className="px-4 py-2 text-gray-800 hover:text-gray-600 text-sm font-medium">blogs</a>
+              <a href="#" className="px-4 py-2 text-gray-800 hover:text-gray-600 text-sm font-medium">components</a> */}
             </div>
           </nav>
 
@@ -221,8 +216,6 @@ function App() {
                     repos={repos}
                     loading={loading}
                     error={error}
-                    selectedRepo={selectedRepo}
-                    handleRepoClick={handleRepoClick}
                   />
                 </ErrorBoundary>
               </Suspense>
