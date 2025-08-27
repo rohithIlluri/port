@@ -303,7 +303,7 @@ function App() {
             </Suspense>
 
             {/* GitHub Stats Section */}
-            <Suspense fallback={
+            {/* <Suspense fallback={
               <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-gray-200 border-t-gray-600 mx-auto mb-4"></div>
                 <p className="text-gray-600">Loading GitHub stats...</p>
@@ -312,7 +312,7 @@ function App() {
               <ErrorBoundary>
                 <GitHubStats contributions={githubContributions} />
               </ErrorBoundary>
-            </Suspense>
+            </Suspense> */}
 
             {/* Music Section */}
             <Suspense fallback={
