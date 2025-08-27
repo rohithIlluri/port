@@ -1,15 +1,42 @@
-import React, { memo } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { COMPONENT_STYLES } from '../../constants/theme';
 
 const GitHubStats = ({ contributions = [] }) => {
-  // Generate contribution grid data for the last year
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Debug: Log the contributions data
+  console.log('GitHubStats received contributions:', contributions.length, 'days');
+  if (contributions.length > 0) {
+    console.log('Sample contribution:', contributions[0]);
+  }
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Generate contribution grid data
   const generateContributionGrid = () => {
     const today = new Date();
     const grid = [];
     const months = [];
     
-    // Generate data for the last 53 weeks (GitHub shows 53 weeks)
-    for (let week = 52; week >= 0; week--) {
+    // Determine weeks to show based on screen size
+    let weeksToShow;
+    if (isMobile) {
+      weeksToShow = 12; // Mobile: show last 12 weeks
+    } else if (window.innerWidth < 1024) {
+      weeksToShow = 20; // Tablet: show last 20 weeks (reduced from 26)
+    } else {
+      weeksToShow = 53; // Desktop: show full year
+    }
+    
+    for (let week = weeksToShow - 1; week >= 0; week--) {
       const weekData = [];
       let weekDate;
       
@@ -34,8 +61,8 @@ const GitHubStats = ({ contributions = [] }) => {
       }
       grid.push(weekData);
       
-      // Track month labels (show months at appropriate intervals)
-      if (week % 4 === 0 || week === 52) {
+      // Add month labels at appropriate intervals (every 4 weeks)
+      if (week % 4 === 0 || week === weeksToShow - 1) {
         months.push(weekDate.toLocaleDateString('en-US', { month: 'short' }));
       } else {
         months.push('');
@@ -50,41 +77,68 @@ const GitHubStats = ({ contributions = [] }) => {
   // Calculate total contributions
   const totalContributions = contributions.reduce((sum, c) => sum + c.count, 0);
   
-  // Get contribution level color (matching GitHub's exact colors)
+  // Get contribution level color
   const getContributionColor = (count) => {
-    if (count === 0) return 'bg-[#ebedf0]'; // GitHub's light gray
-    if (count === 1) return 'bg-[#9be9a8]'; // GitHub's light green
-    if (count === 2) return 'bg-[#40c463]'; // GitHub's medium green
-    if (count === 3) return 'bg-[#30a14e]'; // GitHub's dark green
-    return 'bg-[#216e39]'; // GitHub's darkest green
+    if (count === 0) return 'bg-[#ebedf0]';
+    if (count === 1) return 'bg-[#9be9a8]';
+    if (count === 2) return 'bg-[#40c463]';
+    if (count === 3) return 'bg-[#30a14e]';
+    return 'bg-[#216e39]';
   };
+
+  // Get appropriate sizing based on screen width
+  const getGridConfig = () => {
+    if (isMobile) {
+      return {
+        itemSize: 'w-2.5 h-2.5',
+        spacing: 'space-x-0.5 space-y-0.5',
+        monthSpacing: 'w-8'
+      };
+    } else if (window.innerWidth < 1024) {
+      return {
+        itemSize: 'w-2.5 h-2.5',
+        spacing: 'space-x-0.5 space-y-0.5',
+        monthSpacing: 'w-10'
+      };
+    } else {
+      return {
+        itemSize: 'w-3 h-3',
+        spacing: 'space-x-1 space-y-1',
+        monthSpacing: 'w-16'
+      };
+    }
+  };
+
+  const config = getGridConfig();
 
   return (
     <section className={COMPONENT_STYLES.section.base} aria-label="GitHub stats section">
       <div className={COMPONENT_STYLES.section.container}>
         <h2 className={COMPONENT_STYLES.section.heading}>Github Stats</h2>
         
-        {/* Contribution Graph */}
-        <div className="mb-4 overflow-x-auto">
-          {/* Month Labels */}
-          <div className="flex justify-between mb-2 text-xs text-gray-600 min-w-max">
+        {/* Contribution Graph Container */}
+        <div className="mb-4 w-full overflow-hidden">
+          {/* Month Labels Row */}
+          <div className="flex mb-3 w-full">
             {months.map((month, index) => (
-              <span key={index} className="w-8 sm:w-12 text-center">
-                {month}
-              </span>
+              <div key={index} className={`${config.monthSpacing} text-center`}>
+                <span className="text-xs text-gray-600 font-medium">
+                  {month}
+                </span>
+              </div>
             ))}
           </div>
           
           {/* Contribution Grid */}
-          <div className="flex space-x-0.5 sm:space-x-1 min-w-max">
+          <div className="flex w-full">
             {grid.map((week, weekIndex) => (
-              <div key={weekIndex} className="flex flex-col space-y-0.5 sm:space-y-1">
+              <div key={weekIndex} className={`flex flex-col ${config.spacing}`}>
                 {week.map((day, dayIndex) => (
                   <div
                     key={dayIndex}
-                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-sm transition-colors duration-200 ${
+                    className={`${config.itemSize} rounded-sm transition-colors duration-200 ${
                       day.isToday 
-                        ? 'ring-1 sm:ring-2 ring-blue-500 ring-offset-0 sm:ring-offset-1' 
+                        ? 'ring-2 ring-blue-500 ring-offset-1' 
                         : getContributionColor(day.count)
                     }`}
                     title={`${day.date}: ${day.count} contributions`}
@@ -96,18 +150,21 @@ const GitHubStats = ({ contributions = [] }) => {
           
           {/* Contribution Count */}
           <div className="mt-4 text-sm text-gray-600">
-            {totalContributions} contributions in the last year
+            {totalContributions} contributions in the last {
+              isMobile ? '12 weeks' : 
+              window.innerWidth < 1024 ? '20 weeks' : 'year'
+            }
           </div>
           
           {/* Legend */}
-          <div className="mt-4 flex items-center space-x-2 sm:space-x-4 text-xs text-gray-600">
+          <div className="mt-4 flex items-center justify-center space-x-4 text-xs text-gray-600">
             <span>Less</span>
-            <div className="flex space-x-0.5 sm:space-x-1">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#ebedf0] rounded-sm"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#9be9a8] rounded-sm"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#40c463] rounded-sm"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#30a14e] rounded-sm"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#216e39] rounded-sm"></div>
+            <div className="flex space-x-1">
+              <div className={`${config.itemSize} bg-[#ebedf0] rounded-sm`}></div>
+              <div className={`${config.itemSize} bg-[#9be9a8] rounded-sm`}></div>
+              <div className={`${config.itemSize} bg-[#40c463] rounded-sm`}></div>
+              <div className={`${config.itemSize} bg-[#30a14e] rounded-sm`}></div>
+              <div className={`${config.itemSize} bg-[#216e39] rounded-sm`}></div>
             </div>
             <span>More</span>
           </div>
