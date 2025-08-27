@@ -65,26 +65,26 @@ const GitHubStats = ({ contributions = [] }) => {
         <h2 className={COMPONENT_STYLES.section.heading}>Github Stats</h2>
         
         {/* Contribution Graph */}
-        <div className="mb-4">
+        <div className="mb-4 overflow-x-auto">
           {/* Month Labels */}
-          <div className="flex justify-between mb-2 text-xs text-gray-600">
+          <div className="flex justify-between mb-2 text-xs text-gray-600 min-w-max">
             {months.map((month, index) => (
-              <span key={index} className="w-12 text-center">
+              <span key={index} className="w-8 sm:w-12 text-center">
                 {month}
               </span>
             ))}
           </div>
           
           {/* Contribution Grid */}
-          <div className="flex space-x-1">
+          <div className="flex space-x-0.5 sm:space-x-1 min-w-max">
             {grid.map((week, weekIndex) => (
-              <div key={weekIndex} className="flex flex-col space-y-1">
+              <div key={weekIndex} className="flex flex-col space-y-0.5 sm:space-y-1">
                 {week.map((day, dayIndex) => (
                   <div
                     key={dayIndex}
-                    className={`w-3 h-3 rounded-sm transition-colors duration-200 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-sm transition-colors duration-200 ${
                       day.isToday 
-                        ? 'ring-2 ring-blue-500 ring-offset-1' 
+                        ? 'ring-1 sm:ring-2 ring-blue-500 ring-offset-0 sm:ring-offset-1' 
                         : getContributionColor(day.count)
                     }`}
                     title={`${day.date}: ${day.count} contributions`}
@@ -100,14 +100,14 @@ const GitHubStats = ({ contributions = [] }) => {
           </div>
           
           {/* Legend */}
-          <div className="mt-4 flex items-center space-x-4 text-xs text-gray-600">
+          <div className="mt-4 flex items-center space-x-2 sm:space-x-4 text-xs text-gray-600">
             <span>Less</span>
-            <div className="flex space-x-1">
-              <div className="w-3 h-3 bg-[#ebedf0] rounded-sm"></div>
-              <div className="w-3 h-3 bg-[#9be9a8] rounded-sm"></div>
-              <div className="w-3 h-3 bg-[#40c463] rounded-sm"></div>
-              <div className="w-3 h-3 bg-[#30a14e] rounded-sm"></div>
-              <div className="w-3 h-3 bg-[#216e39] rounded-sm"></div>
+            <div className="flex space-x-0.5 sm:space-x-1">
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#ebedf0] rounded-sm"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#9be9a8] rounded-sm"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#40c463] rounded-sm"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#30a14e] rounded-sm"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-[#216e39] rounded-sm"></div>
             </div>
             <span>More</span>
           </div>
