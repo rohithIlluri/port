@@ -4,7 +4,7 @@ import { TMDB_CONFIG, TMDB_ENDPOINTS } from '../constants/tmdb';
 const MOVIE_POSTERS = {
   24: '/port/kill-bill-poster.jpg', // Kill Bill: Vol. 1 - local image
   155: 'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg', // The Dark Knight
-  157336: 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvI1.jpg', // Interstellar
+  157336: '/port/artists/interstellar.jpeg', // Interstellar - local image
   680: 'https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg', // Pulp Fiction
 };
 
