@@ -5,10 +5,10 @@ import { fetchArtistData, getArtistImageUrl } from '../../utils/spotify';
 
 // Local image mapping using public folder (no import issues)
 const LOCAL_ARTIST_IMAGES = {
-  '711MCceyCBcFnzjGY4Q7Un': '/artists/ac-dc.jpg', // ac/dc
-  '3WrFJ7ztbogyGnTHbHJFl2': '/artists/the-beatles.jpg', // The Beatles
-  '1mYsTxnqsietFxj1OgoGbG': '/artists/ar-rahman.jpg', // A.R. Rahman
-  '6XyY86QOPPrYVGvF9ch6wz': '/artists/linkin-park.jpg', // Linkin Park
+  '711MCceyCBcFnzjGY4Q7Un': '/port/artists/ac-dc.jpg', // ac/dc
+  '3WrFJ7ztbogyGnTHbHJFl2': '/port/artists/the-beatles.jpg', // The Beatles
+  '1mYsTxnqsietFxj1OgoGbG': '/port/artists/ar-rahman.jpg', // A.R. Rahman
+  '6XyY86QOPPrYVGvF9ch6wz': '/port/artists/linkin-park.jpg', // Linkin Park
 };
 
 const Music = () => {
